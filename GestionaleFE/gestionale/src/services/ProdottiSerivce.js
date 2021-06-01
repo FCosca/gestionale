@@ -22,8 +22,24 @@ function ProdottiFetch (){
   },[]) 
 
 
+  async function GetProdottiByNome(nome){
+    const res = await fetch(`${config.api}prodotti/findByNome?nome=${nome}`,{
+      method: 'GET'
+    })
+    const data = await res.json()
+    .then (data => setProdotti(data) )
+    console.log(prodotti)
+    if (res.status >= 400) {
+      console.warn("ERROR api");
+      throw new Error(data.message);
+    }
+    return data;   
+    
+  };
+
+
   return(
-    prodotti ? <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} />  : <></>
+    prodotti ? <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome}/>  : <></>
     ) 
   }
 
