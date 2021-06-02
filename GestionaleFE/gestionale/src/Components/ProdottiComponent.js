@@ -4,7 +4,8 @@ import React, { Component, useState } from 'react'
 
   
 
-const Prodotti = ({ prodotti, GetProdottiByNome }) => {
+const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetProdottiOrderByCres }) => {
+    const [ord , setOrd] = useState("")
     const [nameC, setNameC] = useState("")
 
 
@@ -12,6 +13,22 @@ const Prodotti = ({ prodotti, GetProdottiByNome }) => {
         e.preventDefault();
         console.log(nameC)
         GetProdottiByNome(nameC)
+    }
+
+    function Ordine(e){
+        e.preventDefault()
+        if(ord == ""){
+            GetProdottiOrderByDecre()
+            setOrd("DECRE")
+        }
+        if(ord == "DECRE"){
+            GetProdottiOrderByCres()
+            setOrd("CRE")
+        }
+        if(ord == "CRE" ){
+            GetProdottiOrderByDecre()
+            setOrd("DECRE")
+        }
     }
     
     
@@ -33,7 +50,7 @@ const Prodotti = ({ prodotti, GetProdottiByNome }) => {
                         <th scope="col">ID</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Descrizione</th>
-                        <th scope="col">Giacenza</th>
+                        <th scope="col" onClick={Ordine}>Giacenza</th>
                     </tr>
                 </thead>
                 {prodotti && prodotti.length > 0 && prodotti.map((prodotto) => (

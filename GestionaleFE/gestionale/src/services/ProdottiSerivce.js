@@ -38,8 +38,37 @@ function ProdottiFetch (){
   };
 
 
+  async function GetProdottiOrderByCres(){
+    const res = await fetch(`${config.api}prodotti/FindGiacCres`,{
+      method: 'GET'
+    })
+    const data = await res.json()
+    .then (data => setProdotti(data), console.log(prodotti))
+    if (res.status >= 400) {
+      console.warn("ERROR api");
+      throw new Error(data.message);
+    }
+    return data;
+
+  };
+
+  async function GetProdottiOrderByDecre(){
+    const res = await fetch(`${config.api}prodotti/FindGiacDecre`,{
+      method: 'GET'
+    })
+    const data = await res.json()
+    .then (data => setProdotti(data), console.log(prodotti))
+    if (res.status >= 400) {
+      console.warn("ERROR api");
+      throw new Error(data.message);
+    }
+    return data;
+
+  };
+
+
   return(
-    prodotti ? <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome}/>  : <></>
+    prodotti ? <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome} GetProdottiOrderByCres={GetProdottiOrderByCres} GetProdottiOrderByDecre={GetProdottiOrderByDecre}/>  : <></>
     ) 
   }
 
