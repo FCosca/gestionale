@@ -22,6 +22,20 @@ function ProdottiFetch (){
   },[]) 
 
 
+  async function GetProdottiAll(){
+    const res = await fetch(`${config.api}prodotti/findAll`,{
+      method: 'GET'
+    })
+    const data = await res.json()
+    .then (data => setProdotti(data), console.log(prodotti))
+    if (res.status >= 400) {
+      console.warn("ERROR api");
+      throw new Error(data.message);
+    }
+    return data;
+  }
+
+
   async function GetProdottiByNome(nome){
     const res = await fetch(`${config.api}prodotti/findByNome?nome=${nome}`,{
       method: 'GET'
@@ -66,9 +80,20 @@ function ProdottiFetch (){
 
   };
 
+  async function DeleteProdotto(id){
+    var res = await fetch(`${config.api}prodotti/delete?id=${id}`,{method: 'DELETE'})
+    var restext = await res.text();
+    console.log(restext)
+        if(restext == 0){
+          console.log('removed');
+          GetProdottiAll();
+        }
+      else{alert("Non puoi eliminare un prodotto se ci sono movimenti")}
+    };
+
 
   return(
-    prodotti ? <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome} GetProdottiOrderByCres={GetProdottiOrderByCres} GetProdottiOrderByDecre={GetProdottiOrderByDecre}/>  : <></>
+    prodotti ? <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome} GetProdottiOrderByCres={GetProdottiOrderByCres} GetProdottiOrderByDecre={GetProdottiOrderByDecre} DeleteProdotto={DeleteProdotto}/>  : <></>
     ) 
   }
 

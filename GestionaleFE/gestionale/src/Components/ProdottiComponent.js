@@ -4,7 +4,7 @@ import React, { Component, useState } from 'react'
 
   
 
-const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetProdottiOrderByCres }) => {
+const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetProdottiOrderByCres, DeleteProdotto }) => {
     const [ord , setOrd] = useState("")
     const [nameC, setNameC] = useState("")
 
@@ -29,6 +29,11 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
             GetProdottiOrderByDecre()
             setOrd("DECRE")
         }
+    }
+
+    function Delete(id){
+        console.log(id)
+        DeleteProdotto(id)
     }
     
     
@@ -60,6 +65,8 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
                         <td>{prodotto.nome}</td>
                         <td>{prodotto.descrizione}</td>
                         <td>{prodotto.giacenza}</td>
+                        <td><button onClick={e => Delete(prodotto.id)}>rimuovi</button></td>
+
                     </tr>
                 </tbody>
                 ))}
