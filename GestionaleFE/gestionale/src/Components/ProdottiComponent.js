@@ -4,15 +4,28 @@ import React, { Component, useState } from 'react'
 
   
 
-const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetProdottiOrderByCres, DeleteProdotto }) => {
+const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetProdottiOrderByCres, DeleteProdotto, settaProdotti }) => {
     const [ord , setOrd] = useState("")
     const [nameC, setNameC] = useState("")
+    const [descrizioneC, setDescrizioneC] = useState("")
+    const [giacenzaC, setGiacenzaC] = useState(0)
 
 
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log(nameC)
         GetProdottiByNome(nameC)
+    }
+
+    function Insert(e){
+        e.preventDefault();
+        console.log(nameC)
+        console.log(descrizioneC)
+        console.log(giacenzaC)
+        settaProdotti(nameC,descrizioneC,giacenzaC)
+
+
+
     }
 
     function Ordine(e){
@@ -47,6 +60,13 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
                     <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nameC} onChange={e => setNameC(e.target.value)}/>
                     <input type="submit" value="Submit" />
                 </div>
+            </form>
+
+            <form onSubmit={Insert}>
+                <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nameC} onChange={e => setNameC(e.target.value)}/>
+                <input type="text" className="form-control" placeholder="Descrizione" aria-label="Nome" aria-describedby="basic-addon1" value={descrizioneC} onChange={e => setDescrizioneC(e.target.value)}/>
+                <input type="text" className="form-control" placeholder="Giacenza" aria-label="Nome" aria-describedby="basic-addon1" value={giacenzaC} onChange={e => setGiacenzaC(e.target.value)}/>
+                <input type="submit" value="Submit" />
             </form>
         
             <table class="table">
