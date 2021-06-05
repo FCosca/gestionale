@@ -130,6 +130,7 @@ function ProdottiFetch (){
     })
       const data = await res.json()
       .then (data => setProdotti(data), console.log(prodotti))
+      GetProdottiAll();
       if (res.status >= 400) {
         console.warn("ERROR api");
         throw new Error(data.message);

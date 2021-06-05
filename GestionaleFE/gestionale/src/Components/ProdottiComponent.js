@@ -23,6 +23,9 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
         console.log(descrizioneC)
         console.log(giacenzaC)
         settaProdotti(nameC,descrizioneC,giacenzaC)
+        setNameC("");
+        setDescrizioneC("")
+        setGiacenzaC(0)
 
 
 
