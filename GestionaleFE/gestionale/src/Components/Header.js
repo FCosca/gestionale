@@ -16,8 +16,10 @@ function Header(){
                         <a href='#'>Ordini</a>
                     </ul>
                 </nav>
-            </div>      
+            </div>
+            <hr></hr>      
         </header>
+        
     )
 }
 export default Header

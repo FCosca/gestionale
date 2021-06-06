@@ -10,28 +10,6 @@ import ProdottiFetch from './services/ProdottiSerivce';
 
 class App extends Component {
 
-  //   state = {
-  //     prodotti: [],
-  //     dipendenti: [],
-  //     fornitori: [],
-  //     movimenti: [],
-  //     ordini: []
-  // }
-
-
-  //test fetch prodotti
-  // componentDidMount(){
-  //     fetch('http://localhost:8080/gestionale-0.0.1-SNAPSHOT/prodotti/findAll')
-  //     .then(res => res.json())
-  //     .then((data) =>{
-  //         this.setState({prodotti: data})
-  //     })
-  //     .catch(console.log)
-    
-  // }
-
-  
-  
   
 
   render() {
