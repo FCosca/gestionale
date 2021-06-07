@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProdottiCom from '../../src/Components/ProdottiComponent'
 import config from '../config';
+import ModificaProdotti from '../../src/Components/ModoficaProdotti'
 
 
 
@@ -11,14 +12,17 @@ function ProdottiFetch (){
   const [name, setName] = useState("")
   const [desc, setDesc] = useState("")
   const [giacenza, setGiacenza] = useState(0)
+  const [id, setId] = useState(0)
+  const [getid, setGetid] = useState(false);
 
 
   const obj = {
-    // id: id,
     nome: name,
     descrizione: desc,
     giacenza: giacenza
   }
+
+
   
   
   
@@ -50,6 +54,9 @@ function ProdottiFetch (){
         
       }
     },[name])
+
+
+ 
 
 
   async function GetProdottiAll(){
@@ -139,11 +146,35 @@ function ProdottiFetch (){
   
     };
 
+    
 
-  return(
-    prodotti ? <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome} GetProdottiOrderByCres={GetProdottiOrderByCres} GetProdottiOrderByDecre={GetProdottiOrderByDecre} DeleteProdotto={DeleteProdotto} settaProdotti={settaProdotti}/>  : <></>
-    ) 
-  }
+
+    async function GetProdottiById(id){
+      const res = await fetch(`${config.api}prodotti/findByID?id=${id}`,{
+        method: 'GET'
+      })
+      const data = await res.json()
+      .then (data => setProdotti(data), console.log(prodotti), setGetid(true))
+      console.log(data)
+      if (res.status >= 400) {
+        console.warn("ERROR api");
+        throw new Error(data.message);
+      }
+      return (data)
+   
+    };
+
+
+
+
+  return (
+    <>
+      {prodotti ? getid ? <ModificaProdotti prodotti={prodotti}/> : <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome} GetProdottiOrderByCres={GetProdottiOrderByCres} GetProdottiOrderByDecre={GetProdottiOrderByDecre} DeleteProdotto={DeleteProdotto} settaProdotti={settaProdotti} GetProdottiById={GetProdottiById}/> : <></>}
+    </>
+  )
+
+
+}
 
 
 

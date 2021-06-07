@@ -4,17 +4,25 @@ import React, { Component, useState } from 'react'
 
   
 
-const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetProdottiOrderByCres, DeleteProdotto, settaProdotti }) => {
+const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetProdottiOrderByCres, DeleteProdotto, settaProdotti, GetProdottiById }) => {
     const [ord , setOrd] = useState("")
     const [nameC, setNameC] = useState("")
     const [descrizioneC, setDescrizioneC] = useState("")
     const [giacenzaC, setGiacenzaC] = useState(0)
+    const [idC, setIdC] = useState(0)
 
 
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log(nameC)
         GetProdottiByNome(nameC)
+    }
+
+    const finById =(e) =>{
+        e.preventDefault();
+        console.log(idC)
+        GetProdottiById(idC)
+
     }
 
     function Insert(e){
@@ -51,6 +59,8 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
         console.log(id)
         DeleteProdotto(id)
     }
+
+
     
     
     return (
@@ -61,6 +71,14 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1"  >nome</span>
                     <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nameC} onChange={e => setNameC(e.target.value)}/>
+                    <input type="submit" value="Submit" />
+                </div>
+            </form>
+
+            <form onSubmit={finById}>
+                <div className="input-group mb-3">
+                    <span className="input-group-text" id="basic-addon1"  >ID</span>
+                    <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={idC} onChange={e => setIdC(e.target.value)}/>
                     <input type="submit" value="Submit" />
                 </div>
             </form>
