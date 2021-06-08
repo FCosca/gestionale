@@ -169,7 +169,7 @@ function ProdottiFetch (){
 
   return (
     <>
-      {prodotti ? getid ? <ModificaProdotti prodotti={prodotti}/> : <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome} GetProdottiOrderByCres={GetProdottiOrderByCres} GetProdottiOrderByDecre={GetProdottiOrderByDecre} DeleteProdotto={DeleteProdotto} settaProdotti={settaProdotti} GetProdottiById={GetProdottiById}/> : <></>}
+      {prodotti ? getid ? <ModificaProdotti prodotti={prodotti} DeleteProdotto={DeleteProdotto}/> : <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome} GetProdottiOrderByCres={GetProdottiOrderByCres} GetProdottiOrderByDecre={GetProdottiOrderByDecre} DeleteProdotto={DeleteProdotto} settaProdotti={settaProdotti} GetProdottiById={GetProdottiById}/> : <></>}
     </>
   )
 
