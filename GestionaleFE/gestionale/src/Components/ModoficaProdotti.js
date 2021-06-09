@@ -1,12 +1,14 @@
 import React, { Component, useState, useEffect } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import {Link, Redirect} from 'react-router-dom'
+import Prodotti from './ProdottiComponent'
 
 const ModificaProdotti = ({ prodotti, DeleteProdotto }) => {
 
     function Delete(id){
         console.log(id)
-        DeleteProdotto(id)
+        DeleteProdotto(id);
     }
 
     return (

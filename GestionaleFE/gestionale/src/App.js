@@ -6,6 +6,8 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import ProdottiService from './services/ProdottiSerivce';
 import ProdottiFetch from './services/ProdottiSerivce';
+import {BrowserRouter as Router, Switch , Route} from "react-router-dom";
+import Home from './Components/Home';
 
 
 class App extends Component {
@@ -17,9 +19,15 @@ class App extends Component {
       <>
      
       <DataContextProvider/>
-      <Header/>
-      <ProdottiFetch/>
-      <Footer/>
+      <Router>
+        <Header/>
+        <Switch>
+          {/* <ProdottiFetch/> */}
+          <Route exact path="/prodotti" component={ProdottiFetch}/>
+          <Route exact path="/" component={Home}/>
+        </Switch>
+        <Footer/>
+      </Router>
       </>
       
     );
