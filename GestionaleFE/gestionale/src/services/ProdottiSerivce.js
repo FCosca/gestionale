@@ -199,7 +199,7 @@ function ProdottiFetch (){
     })
       const data = await res.json()
       .then (data => setProdotti(data), console.log(prodotti))
-      // GetProdottiAll();
+      GetProdottiById(id)
       if (res.status >= 400) {
         console.warn("ERROR api");
         throw new Error(data.message);
@@ -213,7 +213,7 @@ function ProdottiFetch (){
 
   return (
     <>
-      {prodotti ? getid ? <ModificaProdotti prodotti={prodotti} DeleteProdotto={DeleteProdotto} UpdateProdotto={UpdateProdotto} settaProdottiMod={settaProdottiMod}/> : <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome} GetProdottiOrderByCres={GetProdottiOrderByCres} GetProdottiOrderByDecre={GetProdottiOrderByDecre} DeleteProdotto={DeleteProdotto}  GetProdottiById={GetProdottiById}/> : <></>}
+      {prodotti ? getid ? <ModificaProdotti prodotti={prodotti} DeleteProdotto={DeleteProdotto} UpdateProdotto={UpdateProdotto} settaProdottiMod={settaProdottiMod}/> : <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome} GetProdottiOrderByCres={GetProdottiOrderByCres} GetProdottiOrderByDecre={GetProdottiOrderByDecre} DeleteProdotto={DeleteProdotto}  GetProdottiById={GetProdottiById} settaProdotti={settaProdotti}/> : <></>}
     </>
   )
 

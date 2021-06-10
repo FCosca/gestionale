@@ -102,10 +102,10 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
                 {prodotti && prodotti.length > 0 && prodotti.map((prodotto) => (
                 <tbody key={prodotto.id}>
                     <tr>
-                        <th scope="row">{prodotto.id}</th>
-                        <td>{prodotto.nome}</td>
-                        <td>{prodotto.descrizione}</td>
-                        <td>{prodotto.giacenza}</td>
+                        <th scope="row" onClick={e => GetProdottiById(prodotto.id)}>{prodotto.id}</th>
+                        <td onClick={e => GetProdottiById(prodotto.id)}>{prodotto.nome}</td>
+                        <td onClick={e => GetProdottiById(prodotto.id)}>{prodotto.descrizione}</td>
+                        <td onClick={e => GetProdottiById(prodotto.id)}>{prodotto.giacenza}</td>
                         <td><button onClick={e => Delete(prodotto.id)}>rimuovi</button></td>
 
                     </tr>
