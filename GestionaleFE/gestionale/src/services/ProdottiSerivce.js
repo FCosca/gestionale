@@ -14,6 +14,8 @@ function ProdottiFetch (){
   const [giacenza, setGiacenza] = useState(0)
   const [id, setId] = useState(0)
   const [getid, setGetid] = useState(false);
+  const [ins, setIns] = useState(false);
+  const [mod, setMod] = useState(false);
 
 
   const obj = {
@@ -22,10 +24,12 @@ function ProdottiFetch (){
     giacenza: giacenza
   }
 
-
-  
-  
-  
+  const obj2 = {
+    id: id,
+    nome: name,
+    descrizione: desc,
+    giacenza: giacenza
+  }
 
   useEffect(() => {
     const getDatiAll = async() =>{
@@ -45,15 +49,37 @@ function ProdottiFetch (){
     setDesc(descrizioneC)
     setGiacenza(giacenzaC)
     setLoading(true)
+    setIns(true)
 }
 
     useEffect(() => {
       if(loading) {
         setLoading(false)
-        InsertProdotto()
+        if(ins){InsertProdotto(); setIns(false)}
+        
         
       }
     },[name])
+
+
+    function settaProdottiMod(idC,nameC,descrizioneC,giacenzaC){
+      setId(idC)
+      setName(nameC)
+      setDesc(descrizioneC)
+      setGiacenza(giacenzaC)
+      setLoading(true)
+      setMod(true)
+    }
+
+    useEffect(() => {
+      if(loading) {
+        setLoading(false)
+        if(mod){UpdateProdotto(); setMod(false)}
+        
+        
+      }
+    },[name])
+
 
 
  
@@ -164,12 +190,30 @@ function ProdottiFetch (){
    
     };
 
+    async function UpdateProdotto(){
+      const res = await fetch(`${config.api}prodotti/update`, {
+        method: "PUT",
+        headers: {  'Accept': 'application/json',
+            'Content-Type': 'application/json' },
+        body:JSON.stringify(obj2)
+    })
+      const data = await res.json()
+      .then (data => setProdotti(data), console.log(prodotti))
+      // GetProdottiAll();
+      if (res.status >= 400) {
+        console.warn("ERROR api");
+        throw new Error(data.message);
+      }
+      return data;
+  
+    };
+
 
 
 
   return (
     <>
-      {prodotti ? getid ? <ModificaProdotti prodotti={prodotti} DeleteProdotto={DeleteProdotto}/> : <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome} GetProdottiOrderByCres={GetProdottiOrderByCres} GetProdottiOrderByDecre={GetProdottiOrderByDecre} DeleteProdotto={DeleteProdotto} settaProdotti={settaProdotti} GetProdottiById={GetProdottiById}/> : <></>}
+      {prodotti ? getid ? <ModificaProdotti prodotti={prodotti} DeleteProdotto={DeleteProdotto} UpdateProdotto={UpdateProdotto} settaProdottiMod={settaProdottiMod}/> : <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome} GetProdottiOrderByCres={GetProdottiOrderByCres} GetProdottiOrderByDecre={GetProdottiOrderByDecre} DeleteProdotto={DeleteProdotto}  GetProdottiById={GetProdottiById}/> : <></>}
     </>
   )
 

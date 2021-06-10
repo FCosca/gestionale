@@ -4,12 +4,55 @@ import Button from 'react-bootstrap/Button'
 import {Link, Redirect} from 'react-router-dom'
 import Prodotti from './ProdottiComponent'
 
-const ModificaProdotti = ({ prodotti, DeleteProdotto }) => {
+const ModificaProdotti = ({ prodotti, DeleteProdotto, UpdateProdotto, settaProdottiMod }) => {
+    const [nameC, setNameC] = useState("")
+    const [descrizioneC, setDescrizioneC] = useState("")
+    const [giacenzaC, setGiacenzaC] = useState(0)
+    const [idC, setIdC] = useState(0)
+    const [loading, setLoading] = useState(false);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);     
+
 
     function Delete(id){
         console.log(id)
         DeleteProdotto(id);
     }
+
+    function setta(){
+        setIdC(prodotti.id)
+        setNameC(prodotti.nome)
+        setDescrizioneC(prodotti.descrizione)
+        setGiacenzaC(prodotti.giacenza)
+        console.log("sono dentro")
+        setLoading(true);
+    }
+
+    useEffect(() => {
+        if(loading) {
+            console.log("useffect")
+            setLoading(false)
+        }
+      },[nameC])
+
+    function chiama(){
+        setta()
+        handleShow()
+
+    }
+
+    function chiama2(){
+        Modifica()
+        handleClose() 
+    }
+
+    function Modifica(){
+        
+        console.log(idC,nameC,descrizioneC,giacenzaC)
+
+        settaProdottiMod(idC,nameC,descrizioneC,giacenzaC);
+        }
 
     return (
         <div id='corpo'>
@@ -31,13 +74,34 @@ const ModificaProdotti = ({ prodotti, DeleteProdotto }) => {
                         <td>{prodotti.descrizione}</td>
                         <td>{prodotti.giacenza}</td>
                         <td><button onClick={e => Delete(prodotti.id)}>rimuovi</button></td>
+                        <td><Button variant="primary" onClick={chiama}>Modifica</Button></td>
 
                         
                     </tr>
                 </tbody>
             </table>
             
-            
+            <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                  
+                        <input type="text" className="form-control" placeholder="ID" aria-label="ID" aria-describedby="basic-addon1" value={idC} onChange={e => setIdC(e.target.value)} disabled/>
+                        <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nameC} onChange={e => setNameC(e.target.value)}/>
+                        <input type="text" className="form-control" placeholder="Descrizione" aria-label="Nome" aria-describedby="basic-addon1" value={descrizioneC} onChange={e => setDescrizioneC(e.target.value)}/>
+                        <input type="text" className="form-control" placeholder="Giacenza" aria-label="Nome" aria-describedby="basic-addon1" value={giacenzaC} onChange={e => setGiacenzaC(e.target.value)}/>
+                        
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Close
+                    </Button>
+                    <Button variant="primary" onClick={chiama2}>
+                      Save Changes
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
         </div>
         
     )
