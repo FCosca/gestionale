@@ -1,4 +1,6 @@
 import React, { Component, useState } from 'react'
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -100,16 +102,22 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
                     </tr>
                 </thead>
                 {prodotti && prodotti.length > 0 && prodotti.map((prodotto) => (
+                    
                 <tbody key={prodotto.id}>
+                    
                     <tr>
-                        <th scope="row" onClick={e => GetProdottiById(prodotto.id)}>{prodotto.id}</th>
+                    
+                    <Link to={`/prodotti/${prodotto.id}`}><th scope="row" onClick={e => GetProdottiById(prodotto.id)}>{prodotto.id}</th></Link> 
                         <td onClick={e => GetProdottiById(prodotto.id)}>{prodotto.nome}</td>
                         <td onClick={e => GetProdottiById(prodotto.id)}>{prodotto.descrizione}</td>
                         <td onClick={e => GetProdottiById(prodotto.id)}>{prodotto.giacenza}</td>
                         <td><button onClick={e => Delete(prodotto.id)}>rimuovi</button></td>
-
+                        
                     </tr>
+                    
                 </tbody>
+                
+                
                 ))}
             </table>
         </div>

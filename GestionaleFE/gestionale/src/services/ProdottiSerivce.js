@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProdottiCom from '../../src/Components/ProdottiComponent'
 import config from '../config';
 import ModificaProdotti from '../../src/Components/ModoficaProdotti'
+import ModificaProdotti2 from '../../src/Components/ModificaProdotto2'
 
 
 
@@ -78,7 +79,7 @@ function ProdottiFetch (){
         
         
       }
-    },[name])
+    },[name, desc, giacenza])
 
 
 
@@ -213,7 +214,7 @@ function ProdottiFetch (){
 
   return (
     <>
-      {prodotti ? getid ? <ModificaProdotti prodotti={prodotti} DeleteProdotto={DeleteProdotto} UpdateProdotto={UpdateProdotto} settaProdottiMod={settaProdottiMod}/> : <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome} GetProdottiOrderByCres={GetProdottiOrderByCres} GetProdottiOrderByDecre={GetProdottiOrderByDecre} DeleteProdotto={DeleteProdotto}  GetProdottiById={GetProdottiById} settaProdotti={settaProdotti}/> : <></>}
+      {prodotti ? getid ? <ModificaProdotti prodotti={prodotti} DeleteProdotto={DeleteProdotto} UpdateProdotto={UpdateProdotto} settaProdottiMod={settaProdottiMod} GetProdottiById={GetProdottiById}/> : <ProdottiCom prodotti={prodotti} setProdotti={setProdotti} GetProdottiByNome={GetProdottiByNome} GetProdottiOrderByCres={GetProdottiOrderByCres} GetProdottiOrderByDecre={GetProdottiOrderByDecre} DeleteProdotto={DeleteProdotto}  GetProdottiById={GetProdottiById} settaProdotti={settaProdotti}/> : <></>}
     </>
   )
 

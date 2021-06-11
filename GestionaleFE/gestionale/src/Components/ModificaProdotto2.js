@@ -3,8 +3,9 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import {Link, Redirect, useHistory, useParams} from 'react-router-dom'
 import Prodotti from './ProdottiComponent'
+import config from '../config';
 
-const ModificaProdotti = ({ prodotti, DeleteProdotto, UpdateProdotto, settaProdottiMod }) => {
+const ModificaProdotti2 = ({ DeleteProdotto, UpdateProdotto, settaProdottiMod}) => {
     const [nameC, setNameC] = useState("")
     const [descrizioneC, setDescrizioneC] = useState("")
     const [giacenzaC, setGiacenzaC] = useState(0)
@@ -14,14 +15,33 @@ const ModificaProdotti = ({ prodotti, DeleteProdotto, UpdateProdotto, settaProdo
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);     
     const history = useHistory(); 
+    let { idState } = useParams();
+    const [prodotti,setProdotti] = useState([])
 
+    
+
+    useEffect(() => {
+      const GetProdottiById = async() =>{
+        const res = await fetch(`${config.api}prodotti/findByID?id=1`,{
+          method: 'GET'
+        })
+        const data = await res.json()
+        .then (data => setProdotti(data), console.log(prodotti))
+      }
+        GetProdottiById()
+    }, [])
+
+
+    
 
 
     function Delete(id){
         console.log(id)
-        DeleteProdotto(id);
+        // DeleteProdotto(id);
         navigateToHome();
     }
+
+    
 
     
 
@@ -43,7 +63,7 @@ const ModificaProdotti = ({ prodotti, DeleteProdotto, UpdateProdotto, settaProdo
             console.log("useffect")
             setLoading(false)
         }
-      },[giacenzaC])
+      },[])
 
     function chiama(){
         setta()
@@ -66,6 +86,7 @@ const ModificaProdotti = ({ prodotti, DeleteProdotto, UpdateProdotto, settaProdo
     return (
         <div id='corpo'>
              <h1>Prodotti</h1>
+             {/* <button onClick={getProd}>Prodotto </button> */}
              {console.log("ciao ", prodotti)}
              <table class="table">
                 <thead>
@@ -106,7 +127,7 @@ const ModificaProdotti = ({ prodotti, DeleteProdotto, UpdateProdotto, settaProdo
                   </Modal.Body>
                   <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                      Close 2
+                      Close
                     </Button>
                     <Button variant="primary" onClick={chiama2}>
                       Save Changes
@@ -118,4 +139,4 @@ const ModificaProdotti = ({ prodotti, DeleteProdotto, UpdateProdotto, settaProdo
     )
 }
 
-export default ModificaProdotti;
+export default ModificaProdotti2;

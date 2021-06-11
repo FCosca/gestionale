@@ -8,6 +8,9 @@ import ProdottiService from './services/ProdottiSerivce';
 import ProdottiFetch from './services/ProdottiSerivce';
 import {BrowserRouter as Router, Switch , Route} from "react-router-dom";
 import Home from './Components/Home';
+import ModificaProdotti from './Components/ModoficaProdotti'
+import ModificaProdotti2 from './Components/ModificaProdotto2'
+
 
 
 class App extends Component {
@@ -25,6 +28,7 @@ class App extends Component {
           {/* <ProdottiFetch/> */}
           <Route exact path="/prodotti" component={ProdottiFetch}/>
           <Route exact path="/" component={Home}/>
+          <Route exact path="/prodotti/:id" component={ProdottiFetch} />
         </Switch>
         <Footer/>
       </Router>
