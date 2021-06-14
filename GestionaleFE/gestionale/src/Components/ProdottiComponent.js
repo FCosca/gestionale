@@ -20,10 +20,12 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
     const [show2, setShow2] = useState(false);
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);     
+    const [show3, setShow3] = useState(false);
+    const handleClose3 = () => setShow3(false);
+    const handleShow3 = () => setShow3(true);    
 
 
     const handleSubmit = (e) =>{
-        e.preventDefault();
         console.log(nameC)
         GetProdottiByNome(nameC)
     }
@@ -90,6 +92,16 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
         handleClose2() 
     }
 
+    function chiama5(){
+        handleShow3()
+
+    }
+
+    function chiama6(){
+        handleSubmit()
+        handleClose3() 
+    }
+
 
     
     
@@ -97,30 +109,43 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
         <div id='corpo'>
             <h1>Prodotti</h1>
             {/* {prodotti.id} */}
-            <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={handleSubmit}>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1"  >nome</span>
                     <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nameC} onChange={e => setNameC(e.target.value)}/>
                     <input type="submit" value="Submit" />
                 </div>
-            </form>
+            </form> */}
+            <div id="buttonTOT">
 
-            {/* <form onSubmit={finById}>
-                <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1"  >ID</span>
-                    <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={idC} onChange={e => setIdC(e.target.value)}/>
+                <span id="button1">
+                    <Button variant="primary" onClick={chiama5}>Cerca Per Nome <i class="fas fa-search"></i></Button>
+
+                </span>
+
+                {/* <form onSubmit={finById}>
+                    <div className="input-group mb-3">
+                        <span className="input-group-text" id="basic-addon1"  >ID</span>
+                        <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={idC} onChange={e => setIdC(e.target.value)}/>
+                        <input type="submit" value="Submit" />
+                    </div>
+                </form> */}
+                <span id="button2">
+                    <Button variant="primary" onClick={chiama3}>Cerca Per ID <i class="fas fa-search"></i></Button>
+
+                </span>
+
+                {/* <form onSubmit={Insert}>
+                    <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nameC} onChange={e => setNameC(e.target.value)}/>
+                    <input type="text" className="form-control" placeholder="Descrizione" aria-label="Nome" aria-describedby="basic-addon1" value={descrizioneC} onChange={e => setDescrizioneC(e.target.value)}/>
+                    <input type="text" className="form-control" placeholder="Giacenza" aria-label="Nome" aria-describedby="basic-addon1" value={giacenzaC} onChange={e => setGiacenzaC(e.target.value)}/>
                     <input type="submit" value="Submit" />
-                </div>
-            </form> */}
-            <td><Button variant="primary" onClick={chiama3}>Cerca Per ID <i class="fas fa-search"></i></Button></td>
-
-            {/* <form onSubmit={Insert}>
-                <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nameC} onChange={e => setNameC(e.target.value)}/>
-                <input type="text" className="form-control" placeholder="Descrizione" aria-label="Nome" aria-describedby="basic-addon1" value={descrizioneC} onChange={e => setDescrizioneC(e.target.value)}/>
-                <input type="text" className="form-control" placeholder="Giacenza" aria-label="Nome" aria-describedby="basic-addon1" value={giacenzaC} onChange={e => setGiacenzaC(e.target.value)}/>
-                <input type="submit" value="Submit" />
-            </form> */}
-            <td><Button variant="primary" onClick={chiama}>Aggiungi Prodotto <i class="fas fa-plus"></i></Button></td>
+                </form> */}
+                <span id="button2">
+                    <Button variant="primary" onClick={chiama}>Aggiungi Prodotto <i class="fas fa-plus"></i></Button>
+                    
+                </span>
+            </div>
         
             <table class="table">
                 <thead>
@@ -153,7 +178,7 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
 
             <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Aggiungi Prodotto</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                   
@@ -174,7 +199,7 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
 
                 <Modal show={show2} onHide={handleClose2}>
                   <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Cerca per ID</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                   
@@ -186,6 +211,26 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
                       Close
                     </Button>
                     <Button variant="primary" onClick={chiama4}>
+                      Save Changes
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+
+
+                <Modal show={show3} onHide={handleClose3}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Cerca per Nome</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                  
+                  <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nameC} onChange={e => setNameC(e.target.value)}/>
+                            
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose3}>
+                      Close
+                    </Button>
+                    <Button variant="primary" onClick={chiama6}>
                       Save Changes
                     </Button>
                   </Modal.Footer>

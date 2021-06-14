@@ -15,3 +15,13 @@ footer{
 hr{
   border-top: 2px dashed blue;
 }
+
+#buttonTOT{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#button2{
+  margin-left: 10px;
+  margin-right: 10px;
+}
