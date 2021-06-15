@@ -28,7 +28,7 @@ class App extends Component {
           {/* <ProdottiFetch/> */}
           <Route exact path="/prodotti" component={ProdottiFetch}/>
           <Route exact path="/" component={Home}/>
-          <Route exact path="/prodotti/:id" component={ProdottiFetch} />
+          {/* <Route exact path="/prodotti/:id" component={ProdottiFetch} /> */}
         </Switch>
         <Footer/>
       </Router>

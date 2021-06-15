@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 
   
 
-const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetProdottiOrderByCres, DeleteProdotto, settaProdotti, GetProdottiById }) => {
+const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetProdottiOrderByCres, DeleteProdotto, settaProdotti, GetProdottiById , GetProdottiAll }) => {
     const [ord , setOrd] = useState("")
     const [nameC, setNameC] = useState("")
     const [descrizioneC, setDescrizioneC] = useState("")
@@ -65,6 +65,11 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
             GetProdottiOrderByDecre()
             setOrd("DECRE")
         }
+    }
+
+    function OrdineId(e){
+        e.preventDefault()
+        GetProdottiAll()
     }
 
     function Delete(id){
@@ -141,7 +146,7 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
                     <input type="text" className="form-control" placeholder="Giacenza" aria-label="Nome" aria-describedby="basic-addon1" value={giacenzaC} onChange={e => setGiacenzaC(e.target.value)}/>
                     <input type="submit" value="Submit" />
                 </form> */}
-                <span id="button2">
+                <span id="button3">
                     <Button variant="primary" onClick={chiama}>Aggiungi Prodotto <i class="fas fa-plus"></i></Button>
                     
                 </span>
@@ -150,7 +155,7 @@ const Prodotti = ({ prodotti, GetProdottiByNome, GetProdottiOrderByDecre, GetPro
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col" onClick={OrdineId}>ID</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Descrizione</th>
                         <th scope="col" onClick={Ordine}>Giacenza</th>

@@ -26,7 +26,7 @@ const ModificaProdotti = ({ prodotti, DeleteProdotto, UpdateProdotto, settaProdo
     
 
     function navigateToHome() {
-      history.push("/prodotti" );
+      history.push("/" );
     }
 
     function setta(){
