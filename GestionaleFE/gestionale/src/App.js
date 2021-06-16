@@ -10,6 +10,8 @@ import {BrowserRouter as Router, Switch , Route} from "react-router-dom";
 import Home from './Components/Home';
 import ModificaProdotti from './Components/ModoficaProdotti'
 import ModificaProdotti2 from './Components/ModificaProdotto2'
+import DipComponent from './Components/DipendentiComponent'
+// import Dip from './services/DipendentiService'
 
 
 
@@ -27,8 +29,10 @@ class App extends Component {
         <Switch>
           {/* <ProdottiFetch/> */}
           <Route exact path="/prodotti" component={ProdottiFetch}/>
-          <Route exact path="/" component={Home}/>
           {/* <Route exact path="/prodotti/:id" component={ProdottiFetch} /> */}
+          <Route exact path="/dipendenti" component={DipComponent}/>
+          {/* <Route exact path="/dipendenti/:id" component={DipSingle} /> */}
+          <Route exact path="/" component={Home}/>
         </Switch>
         <Footer/>
       </Router>
