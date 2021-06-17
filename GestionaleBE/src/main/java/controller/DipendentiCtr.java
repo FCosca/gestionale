@@ -56,8 +56,8 @@ public class DipendentiCtr {
 	
 	@GetMapping("/findByID")
 	@Produces("application/json")
-	public Dipendenti findByID(@RequestParam(value = "ID_dip", required = true) int ID_dip){
-		return ds.findById(ID_dip);
+	public Dipendenti findByID(@RequestParam(value = "id", required = true) int id){
+		return ds.findById(id);
 	}
 	
 	@GetMapping("/findByNome")

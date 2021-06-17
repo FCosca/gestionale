@@ -46,8 +46,8 @@ public class DipendentiRepository {
 		return res;
 	}
 	
-	public Dipendenti findByid(int ID_dip) {
-		return em.find(Dipendenti.class, ID_dip);
+	public Dipendenti findByid(int id) {
+		return em.find(Dipendenti.class, id);
 	}
 	
 	@SuppressWarnings("unchecked")

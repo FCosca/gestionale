@@ -38,8 +38,8 @@ public class DipendentiService {
 		return dr.findAll();
 	}
 	
-	public Dipendenti findById(int ID_dip){
-		return dr.findByid(ID_dip);
+	public Dipendenti findById(int id){
+		return dr.findByid(id);
 	}
 	
 	public List<Dipendenti> findByNome(String nome){
