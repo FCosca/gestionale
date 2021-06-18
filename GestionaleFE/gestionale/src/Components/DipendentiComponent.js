@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from 'react'
-import {GetDipendentiAll} from '../services/DipendentiService'
+import {GetDipendentiAll, GetDipById} from '../services/DipendentiService'
+import { Link } from 'react-router-dom';
 
 
 function Dipendenti (){
@@ -14,7 +15,11 @@ function Dipendenti (){
         <>
             {console.log(dipendenti)}
             {dipendenti.map((dip)=>(
-                <p>{dip.id}{dip.nome}{dip.cognome}</p>
+                <>
+               <Link to={`/dipendenti/${dip.id}`}><p>{dip.id}</p></Link> 
+
+                {/* <p onClick={GetDipById(dip.id)}>{dip.id}{dip.nome}{dip.cognome}</p> */}
+                </>
             ))}
         </>
     )

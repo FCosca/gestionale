@@ -2,7 +2,7 @@ import config from '../config';
 
 
 export async function GetDipendentiAll(){
-    const res = await fetch(`${config.api}/dipendente/findAll`,{
+    const res = await fetch(`${config.api}dipendente/findAll`,{
         method: 'GET'
     })
     const data = await res.json()
@@ -11,4 +11,17 @@ export async function GetDipendentiAll(){
         throw new Error(data.message);
     }
     return data;
+}
+
+export async function GetDipById(id){
+    const res = await fetch(`${config.api}dipendente/findByID?id=${id}`,{
+        method: 'GET'
+      })
+    const data = await res.json()
+    if (res.status >= 400) {
+        console.warn("ERROR api");
+        throw new Error(data.message);
+      }
+      return (data);
+   
 }
