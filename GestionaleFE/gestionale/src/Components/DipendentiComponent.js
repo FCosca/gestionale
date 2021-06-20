@@ -1,19 +1,50 @@
 import React, { Component, useState, useEffect } from 'react'
-import {GetDipendentiAll, GetDipById} from '../services/DipendentiService'
+import {GetDipendentiAll, GetDipById, GetDipendentiByNome} from '../services/DipendentiService'
 import { Link } from 'react-router-dom';
 
 
 function Dipendenti (){
     const [dipendenti, setDipendenti] = useState([])
+    const [nome, setNome] = useState("")
+    const [loading, setLoading] = useState(false)
+    // const [loadingTutto, setLoadingTutto] = useState(false)
+
+
+
 
     
     useEffect(() => {
-        GetDipendentiAll().then(data => setDipendenti(data));
+        GetDipendentiAll().then(data => setDipendenti(data))
+        
     }, [])
+
+
+
+
+    const handleSubmit =(e)=>{
+        e.preventDefault()
+    
+        console.log("handlesubmit",nome)
+        
+            GetDipendentiByNome(nome).then(data => setDipendenti(data));
+            if(nome===""){
+                     {console.log("dentro")}
+                                ricarica()
+    
+                 }
+             
+    }
+
+    async function ricarica(){
+        
+            const res = await GetDipendentiAll().then(data => setDipendenti(data));       
+
+    }
+
+
 
     return(
         <>
-<<<<<<< HEAD
 
             <form onSubmit={handleSubmit}>
                 <div className="input-group mb-3">
@@ -53,16 +84,6 @@ function Dipendenti (){
 
             </table>
             
-=======
-            {console.log(dipendenti)}
-            {dipendenti.map((dip)=>(
-                <>
-               <Link to={`/dipendenti/${dip.id}`}><p>{dip.id}</p></Link> 
-
-                {/* <p onClick={GetDipById(dip.id)}>{dip.id}{dip.nome}{dip.cognome}</p> */}
-                </>
-            ))}
->>>>>>> parent of fa689f8 (FE: add method Dipendente GetByNome)
         </>
     )
 }
