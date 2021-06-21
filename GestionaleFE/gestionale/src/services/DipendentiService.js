@@ -25,3 +25,17 @@ export async function GetDipById(id){
       return (data);
    
 }
+
+export async function GetDipendentiByNome(nome){
+    if(nome!=""){
+    const res = await fetch (`${config.api}dipendente/findByNome?nome=${nome}`,{
+        method: 'GET'
+    })
+    const data = await res.json()
+    if (res.status >= 400) {
+        console.warn("ERROR api");
+        throw new Error(data.message);
+      }
+      return data;   
+      
+    }};
