@@ -1,11 +1,12 @@
 import React, { Component, useState, useEffect } from 'react'
-import {GetDipendentiAll, GetDipById, GetDipendentiByNome} from '../services/DipendentiService'
+import {GetDipendentiAll, GetDipById, GetDipendentiByNome, GetDipendentiByCognome} from '../services/DipendentiService'
 import { Link } from 'react-router-dom';
 
 
 function Dipendenti (){
     const [dipendenti, setDipendenti] = useState([])
     const [nome, setNome] = useState("")
+    const [cognome, setCognome] = useState("")
     const [loading, setLoading] = useState(false)
     // const [loadingTutto, setLoadingTutto] = useState(false)
 
@@ -35,6 +36,18 @@ function Dipendenti (){
              
     }
 
+
+    const handleSubmitCognome=(e)=>{
+        e.preventDefault()
+        console.log("cognome", cognome)
+        GetDipendentiByCognome(cognome).then(data=> setDipendenti(data));
+        if(cognome===""){
+            {console.log("dentro2")}
+            ricarica()
+        }
+
+    }
+
     async function ricarica(){
         
             const res = await GetDipendentiAll().then(data => setDipendenti(data));       
@@ -50,6 +63,13 @@ function Dipendenti (){
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1"  >nome</span>
                     <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nome} onChange={e => setNome(e.target.value)}/>
+                    <input type="submit" value="Submit" />
+                </div>
+            </form>
+            <form onSubmit={handleSubmitCognome}>
+                <div className="input-group mb-3">
+                    <span className="input-group-text" id="basic-addon1"  >cognome</span>
+                    <input type="text" className="form-control" placeholder="Cognome" aria-label="Nome" aria-describedby="basic-addon1" value={cognome} onChange={e => setCognome(e.target.value)}/>
                     <input type="submit" value="Submit" />
                 </div>
             </form>

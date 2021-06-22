@@ -39,3 +39,17 @@ export async function GetDipendentiByNome(nome){
       return data;   
       
     }};
+
+export async function GetDipendentiByCognome(cognome){
+    if(cognome!=""){
+        const res = await fetch (`${config.api}dipendente/findByCognome?cognome=${cognome}`, {
+            method: 'GET'
+        })
+        const data = await res.json()
+        if(res.status >= 400){
+            console.warn("ERROR api");
+        throw new Error(data.message);
+      }
+      return data;   
+      
+    }};
