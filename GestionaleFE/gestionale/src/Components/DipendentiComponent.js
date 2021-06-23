@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react'
-import {GetDipendentiAll, GetDipById, GetDipendentiByNome, GetDipendentiByCognome} from '../services/DipendentiService'
+import {GetDipendentiAll, GetDipById, GetDipendentiByNome, GetDipendentiByCognome, GetDipendentiByRuolo} from '../services/DipendentiService'
 import { Link } from 'react-router-dom';
 
 
@@ -7,6 +7,7 @@ function Dipendenti (){
     const [dipendenti, setDipendenti] = useState([])
     const [nome, setNome] = useState("")
     const [cognome, setCognome] = useState("")
+    const [ruolo, setRuolo] = useState("")
     const [loading, setLoading] = useState(false)
     // const [loadingTutto, setLoadingTutto] = useState(false)
 
@@ -48,6 +49,17 @@ function Dipendenti (){
 
     }
 
+
+    const handleSubmitRuolo=(e)=>{
+        e.preventDefault()
+        console.log("ruolo", ruolo)
+        GetDipendentiByRuolo(ruolo).then(data=>setDipendenti(data));
+        if(ruolo===""){
+            {console.log("dentro3")}
+            ricarica()
+        }
+    }
+
     async function ricarica(){
         
             const res = await GetDipendentiAll().then(data => setDipendenti(data));       
@@ -69,7 +81,14 @@ function Dipendenti (){
             <form onSubmit={handleSubmitCognome}>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1"  >cognome</span>
-                    <input type="text" className="form-control" placeholder="Cognome" aria-label="Nome" aria-describedby="basic-addon1" value={cognome} onChange={e => setCognome(e.target.value)}/>
+                    <input type="text" className="form-control" placeholder="Cognome" aria-label="Cognome" aria-describedby="basic-addon1" value={cognome} onChange={e => setCognome(e.target.value)}/>
+                    <input type="submit" value="Submit" />
+                </div>
+            </form>
+            <form onSubmit={handleSubmitRuolo}>
+                <div className="input-group mb-3">
+                    <span className="input-group-text" id="basic-addon1"  >Ruolo</span>
+                    <input type="text" className="form-control" placeholder="Ruolo" aria-label="Ruolo" aria-describedby="basic-addon1" value={ruolo} onChange={e => setRuolo(e.target.value)}/>
                     <input type="submit" value="Submit" />
                 </div>
             </form>

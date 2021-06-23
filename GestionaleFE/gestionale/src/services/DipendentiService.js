@@ -53,3 +53,17 @@ export async function GetDipendentiByCognome(cognome){
       return data;   
       
     }};
+
+export async function GetDipendentiByRuolo(ruolo){
+    if(ruolo!=""){
+        const res = await fetch (`${config.api}dipendente/findByRuolo?ruolo=${ruolo}`, {
+            method: 'GET'
+        })
+        const data = await res.json()
+        if(res.status >= 400){
+            console.warn("ERROR api");
+        throw new Error(data.message);
+        }
+        return data;   
+        
+    }};
