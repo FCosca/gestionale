@@ -14,6 +14,7 @@ export async function GetDipendentiAll(){
 }
 
 export async function GetDipById(id){
+    if(id!=""){
     const res = await fetch(`${config.api}dipendente/findByID?id=${id}`,{
         method: 'GET'
       })
@@ -24,7 +25,7 @@ export async function GetDipById(id){
       }
       return (data);
    
-}
+}};
 
 export async function GetDipendentiByNome(nome){
     if(nome!=""){

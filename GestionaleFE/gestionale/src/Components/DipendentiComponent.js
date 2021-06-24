@@ -1,14 +1,16 @@
 import React, { Component, useState, useEffect } from 'react'
 import {GetDipendentiAll, GetDipById, GetDipendentiByNome, GetDipendentiByCognome, GetDipendentiByRuolo} from '../services/DipendentiService'
-import { Link } from 'react-router-dom';
+import { Link , Redirect, useHistory} from 'react-router-dom';
 
 
 function Dipendenti (){
     const [dipendenti, setDipendenti] = useState([])
+    const [id, setId] = useState("")
     const [nome, setNome] = useState("")
     const [cognome, setCognome] = useState("")
     const [ruolo, setRuolo] = useState("")
     const [loading, setLoading] = useState(false)
+    // const history = useHistory(); 
     // const [loadingTutto, setLoadingTutto] = useState(false)
 
 
@@ -60,6 +62,20 @@ function Dipendenti (){
         }
     }
 
+    const handleSubmitId=(e)=>{
+        e.preventDefault()
+        console.log("id", id)
+        GetDipById(id).then(data=>setDipendenti(data));
+        if(id===""){
+            {console.log("dentro4")}
+            ricarica()
+        }
+    }
+    
+    // function navigateToHome() {
+    //     history.push("/dipendenti" );
+    //   }
+
     async function ricarica(){
         
             const res = await GetDipendentiAll().then(data => setDipendenti(data));       
@@ -70,7 +86,7 @@ function Dipendenti (){
 
     return(
         <>
-
+            {/* <button onClick={navigateToHome}><i class="fas fa-arrow-left"></i></button> */}
             <form onSubmit={handleSubmit}>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1"  >nome</span>
@@ -89,6 +105,13 @@ function Dipendenti (){
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1"  >Ruolo</span>
                     <input type="text" className="form-control" placeholder="Ruolo" aria-label="Ruolo" aria-describedby="basic-addon1" value={ruolo} onChange={e => setRuolo(e.target.value)}/>
+                    <input type="submit" value="Submit" />
+                </div>
+            </form>
+            <form onSubmit={handleSubmitId}>
+                <div className="input-group mb-3">
+                    <span className="input-group-text" id="basic-addon1"  >ID</span>
+                    <input type="text" className="form-control" placeholder="ID" aria-label="ID" aria-describedby="basic-addon1" value={id} onChange={e => setId(e.target.value)}/>
                     <input type="submit" value="Submit" />
                 </div>
             </form>
@@ -122,6 +145,8 @@ function Dipendenti (){
                 ))}
 
             </table>
+
+
             
         </>
     )
