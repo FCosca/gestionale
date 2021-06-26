@@ -16,6 +16,9 @@ function Dipendenti (){
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [show2, setShow2] = useState(false);
+    const handleClose2 = () => setShow2(false);
+    const handleShow2 = () => setShow2(true);
     // const [loadingTutto, setLoadingTutto] = useState(false)
 
 
@@ -102,6 +105,22 @@ function Dipendenti (){
         handleClose() 
     }
 
+    function chiama3(){
+        {console.log("sto aprendo cognome")}
+        handleShow2()
+
+    }
+
+    function chiama4(){
+        console.log("cognome", cognome)
+        GetDipendentiByCognome(cognome).then(data=> setDipendenti(data));
+            if(cognome===""){
+                {console.log("dentro2")}
+                ricarica()
+            }
+        handleClose2() 
+    }
+
 
 
     return(
@@ -111,6 +130,11 @@ function Dipendenti (){
                 <span id="button1">
                     <Button variant="primary" onClick={chiama1}>Cerca Per Nome <i class="fas fa-search"></i></Button>
                 </span>
+
+
+                <span id="button2">
+                    <Button variant="primary" onClick={chiama3}>Cerca Per Cognome <i class="fas fa-search"></i></Button>
+                </span>
             </div>
             {/* <form onSubmit={handleSubmit}>
                 <div className="input-group mb-3">
@@ -119,13 +143,13 @@ function Dipendenti (){
                     <input type="submit" value="Submit" />
                 </div>
             </form> */}
-            <form onSubmit={handleSubmitCognome}>
+            {/* <form onSubmit={handleSubmitCognome}>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1"  >cognome</span>
                     <input type="text" className="form-control" placeholder="Cognome" aria-label="Cognome" aria-describedby="basic-addon1" value={cognome} onChange={e => setCognome(e.target.value)}/>
                     <input type="submit" value="Submit" />
                 </div>
-            </form>
+            </form> */}
             <form onSubmit={handleSubmitRuolo}>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1"  >Ruolo</span>
@@ -185,6 +209,26 @@ function Dipendenti (){
                       Close
                     </Button>
                     <Button variant="primary" onClick={chiama2}>
+                      Save Changes
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+
+            
+                <Modal show={show2} onHide={handleClose2}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Cerca per Cognome</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                  
+                  <input type="text" className="form-control" placeholder="Cognome" aria-label="Nome" aria-describedby="basic-addon1" value={cognome} onChange={e => setCognome(e.target.value)}/>
+                            
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose2}>
+                      Close
+                    </Button>
+                    <Button variant="primary" onClick={chiama4}>
                       Save Changes
                     </Button>
                   </Modal.Footer>
