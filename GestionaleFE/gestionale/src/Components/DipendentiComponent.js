@@ -19,6 +19,9 @@ function Dipendenti (){
     const [show2, setShow2] = useState(false);
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
+    const [show3, setShow3] = useState(false);
+    const handleClose3 = () => setShow3(false);
+    const handleShow3 = () => setShow3(true);
     // const [loadingTutto, setLoadingTutto] = useState(false)
 
 
@@ -48,16 +51,16 @@ function Dipendenti (){
     // }
 
 
-    const handleSubmitCognome=(e)=>{
-        e.preventDefault()
-        console.log("cognome", cognome)
-        GetDipendentiByCognome(cognome).then(data=> setDipendenti(data));
-        if(cognome===""){
-            {console.log("dentro2")}
-            ricarica()
-        }
+    // const handleSubmitCognome=(e)=>{
+    //     e.preventDefault()
+    //     console.log("cognome", cognome)
+    //     GetDipendentiByCognome(cognome).then(data=> setDipendenti(data));
+    //     if(cognome===""){
+    //         {console.log("dentro2")}
+    //         ricarica()
+    //     }
 
-    }
+    // }
 
 
     const handleSubmitRuolo=(e)=>{
@@ -122,6 +125,23 @@ function Dipendenti (){
     }
 
 
+    function chiama5(){
+        {console.log("sto aprendo ruolo")}
+        handleShow3()
+
+    }
+
+    function chiama6(){
+        console.log("ruolo", ruolo)
+        GetDipendentiByRuolo(ruolo).then(data=>setDipendenti(data));
+            if(ruolo===""){
+                {console.log("dentro3")}
+                ricarica()
+            }
+        handleClose3() 
+    }
+
+
 
     return(
         <>
@@ -134,6 +154,10 @@ function Dipendenti (){
 
                 <span id="button2">
                     <Button variant="primary" onClick={chiama3}>Cerca Per Cognome <i class="fas fa-search"></i></Button>
+                </span>
+
+                <span id="button3">
+                    <Button variant="primary" onClick={chiama5}>Cerca Per Ruolo <i class="fas fa-search"></i></Button>
                 </span>
             </div>
             {/* <form onSubmit={handleSubmit}>
@@ -150,13 +174,13 @@ function Dipendenti (){
                     <input type="submit" value="Submit" />
                 </div>
             </form> */}
-            <form onSubmit={handleSubmitRuolo}>
+            {/* <form onSubmit={handleSubmitRuolo}>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1"  >Ruolo</span>
                     <input type="text" className="form-control" placeholder="Ruolo" aria-label="Ruolo" aria-describedby="basic-addon1" value={ruolo} onChange={e => setRuolo(e.target.value)}/>
                     <input type="submit" value="Submit" />
                 </div>
-            </form>
+            </form> */}
             <form onSubmit={navigateToHome}>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1"  >ID</span>
@@ -196,43 +220,62 @@ function Dipendenti (){
             </table>
 
             <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
+                <Modal.Header closeButton>
                     <Modal.Title>Cerca per Nome</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                  
-                  <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nome} onChange={e => setNome(e.target.value)}/>
+                </Modal.Header>
+                <Modal.Body>
+                
+                    <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nome} onChange={e => setNome(e.target.value)}/>
                             
-                  </Modal.Body>
-                  <Modal.Footer>
+                </Modal.Body>
+                <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                      Close
+                        Close
                     </Button>
                     <Button variant="primary" onClick={chiama2}>
-                      Save Changes
+                        Save Changes
                     </Button>
-                  </Modal.Footer>
-                </Modal>
+                </Modal.Footer>
+            </Modal>
 
             
-                <Modal show={show2} onHide={handleClose2}>
-                  <Modal.Header closeButton>
+            <Modal show={show2} onHide={handleClose2}>
+                <Modal.Header closeButton>
                     <Modal.Title>Cerca per Cognome</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                  
-                  <input type="text" className="form-control" placeholder="Cognome" aria-label="Nome" aria-describedby="basic-addon1" value={cognome} onChange={e => setCognome(e.target.value)}/>
-                            
-                  </Modal.Body>
-                  <Modal.Footer>
+                </Modal.Header>
+                <Modal.Body>
+                
+                    <input type="text" className="form-control" placeholder="Cognome" aria-label="Nome" aria-describedby="basic-addon1" value={cognome} onChange={e => setCognome(e.target.value)}/>
+                        
+                </Modal.Body>
+                <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose2}>
-                      Close
+                        Close
                     </Button>
                     <Button variant="primary" onClick={chiama4}>
-                      Save Changes
+                        Save Changes
                     </Button>
-                  </Modal.Footer>
-                </Modal>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={show3} onHide={handleClose3}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Cerca per Ruolo</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                
+                    <input type="text" className="form-control" placeholder="Ruolo" aria-label="Ruolo" aria-describedby="basic-addon1" value={ruolo} onChange={e => setRuolo(e.target.value)}/>
+                        
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose3}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={chiama6}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
 
             
