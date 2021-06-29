@@ -30,8 +30,8 @@ public class DipendentiService {
 	}
 	
 	@Transactional
-	public void remove(Dipendenti d) throws ClassNotFoundException, SQLException, NamingException, ParseException {
-		dr.delete(d);
+	public void remove(int id) throws ClassNotFoundException, SQLException, NamingException, ParseException {
+		dr.delete(id);
 	}
 	
 	public List<Dipendenti> findAll(){

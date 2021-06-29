@@ -44,8 +44,8 @@ public class DipendentiCtr {
 	
 	@DeleteMapping("/delete")
 	@Produces("application/json")
-	public void remove(@RequestBody Dipendenti d) throws ClassNotFoundException, SQLException, NamingException, ParseException {
-		ds.remove(d);
+	public void remove(@RequestParam (value = "id", required  =true ) int id) throws ClassNotFoundException, SQLException, NamingException, ParseException {
+		ds.remove(id);
 	}
 	
 	@GetMapping("/findAll")

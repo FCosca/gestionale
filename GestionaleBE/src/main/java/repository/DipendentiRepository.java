@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import model.Dipendenti;
+import model.Prodotti;
 
 @Repository
 public class DipendentiRepository {
@@ -33,9 +34,8 @@ public class DipendentiRepository {
 		
 	}
 	
-	public void delete(Dipendenti d)throws ClassNotFoundException, SQLException, NamingException, ParseException {
-		Dipendenti dd = em.find(Dipendenti.class, d.getId());
-		em.remove(dd);
+	public void delete(int id)throws ClassNotFoundException, SQLException, NamingException, ParseException {
+		em.remove(em.find(Dipendenti.class, id));
 	}
 	
 	@SuppressWarnings("unchecked")
