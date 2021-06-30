@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react'
-import {GetDipendentiAll, GetDipById, GetDipendentiByNome, GetDipendentiByCognome, GetDipendentiByRuolo} from '../services/DipendentiService'
+import {GetDipendentiAll, GetDipById, GetDipendentiByNome, GetDipendentiByCognome, GetDipendentiByRuolo, deleteDip} from '../services/DipendentiService'
 import { Link , Redirect, useHistory} from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -25,6 +25,7 @@ function Dipendenti (){
     const [show4, setShow4] = useState(false);
     const handleClose4 = () => setShow4(false);
     const handleShow4 = () => setShow4(true);
+    const [del, setDel] = useState(false)
     // const [loadingTutto, setLoadingTutto] = useState(false)
 
 
@@ -33,8 +34,11 @@ function Dipendenti (){
     
     useEffect(() => {
         GetDipendentiAll().then(data => setDipendenti(data))
-        
-    }, [])
+        if(del){
+            setDel(false)
+            GetDipendentiAll().then(data => setDipendenti(data))
+        }
+    }, [del])
 
 
 
@@ -66,15 +70,15 @@ function Dipendenti (){
     // }
 
 
-    const handleSubmitRuolo=(e)=>{
-        e.preventDefault()
-        console.log("ruolo", ruolo)
-        GetDipendentiByRuolo(ruolo).then(data=>setDipendenti(data));
-        if(ruolo===""){
-            {console.log("dentro3")}
-            ricarica()
-        }
-    }
+    // const handleSubmitRuolo=(e)=>{
+    //     e.preventDefault()
+    //     console.log("ruolo", ruolo)
+    //     GetDipendentiByRuolo(ruolo).then(data=>setDipendenti(data));
+    //     if(ruolo===""){
+    //         {console.log("dentro3")}
+    //         ricarica()
+    //     }
+    // }
 
     // const handleSubmitId=(e)=>{
     //     e.preventDefault()
@@ -86,13 +90,13 @@ function Dipendenti (){
     //     }
     // }
     
-    function navigateToHome() {
-        history.push("/dipendenti/"+id );
-      }
+    // 
+    
 
     async function ricarica(){
         
-            const res = await GetDipendentiAll().then(data => setDipendenti(data));       
+            const res = await GetDipendentiAll().then(data => setDipendenti(data));  
+                 
 
     }
 
@@ -155,6 +159,27 @@ function Dipendenti (){
         handleClose4() 
     }
 
+    function deleteDipe(id){
+        console.log(id)
+        deleteDip(id)
+        setDel(true)
+        // if(del){
+        //     setDel(false)
+        //     ricarica()
+        // }
+        
+        // ricarica()
+
+    }
+    
+    // useEffect(()=>{
+    //     if(del){
+    //         setDel(false)
+    //         ricarica()
+            
+    //     }
+    // },[del])
+
 
 
     return(
@@ -198,13 +223,13 @@ function Dipendenti (){
                     <input type="submit" value="Submit" />
                 </div>
             </form> */}
-            <form onSubmit={navigateToHome}>
+            {/* <form onSubmit={navigateToHome}>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1"  >ID</span>
                     <input type="text" className="form-control" placeholder="ID" aria-label="ID" aria-describedby="basic-addon1" value={id} onChange={e => setId(e.target.value)}/>
                     <input type="submit" value="Submit" />
                 </div>
-            </form>
+            </form> */}
             {console.log("return", dipendenti)}
             {/* {console.log(nome)} */}
             <table class="table">
@@ -227,6 +252,7 @@ function Dipendenti (){
                             <td>{dip.numero}</td>
                             <td>{dip.ruolo}</td>
                             <td>{dip.stipendio}</td>
+                            <td><button onClick={e => deleteDipe(dip.id)}>rimuovi</button></td>
 
 
                         </tr>

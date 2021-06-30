@@ -68,3 +68,19 @@ export async function GetDipendentiByRuolo(ruolo){
         return data;   
         
     }};
+
+export async function deleteDip(id){
+    if(id!=""){
+        var res = await fetch (`${config.api}dipendente/delete?id=${id}`, {
+            method: 'DELETE'
+        })
+        var restext = await res.text();
+        console.log(restext)
+        if(restext == 0){
+            console.log('removed');
+            // GetDipendentiAll();
+          }
+          
+        
+    }};
+
