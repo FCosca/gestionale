@@ -60,6 +60,8 @@ function Dipendenti (){
 
 
 
+
+
     // const handleSubmit =(e)=>{
     //     e.preventDefault()
     
@@ -231,7 +233,6 @@ function Dipendenti (){
                     <Button variant="primary" onClick={chiama1}>Cerca Per Nome <i class="fas fa-search"></i></Button>
                 </span>
 
-
                 <span id="button2">
                     <Button variant="primary" onClick={chiama3}>Cerca Per Cognome <i class="fas fa-search"></i></Button>
                 </span>
@@ -239,9 +240,19 @@ function Dipendenti (){
                 <span id="button31">
                     <Button variant="primary" onClick={chiama5}>Cerca Per Ruolo <i class="fas fa-search"></i></Button>
                 </span>
+
                 <span id="button4">
                     <Button variant="primary" onClick={chiama7}>Cerca Per ID <i class="fas fa-search"></i></Button>
                 </span>
+
+                <span id="buttonReset">
+                    <Button variant="primary" onClick={clear}><i class="far fa-times-circle"></i></Button>
+                </span>
+                
+                <span id="buttonReset">
+                    <Button variant="primary" onClick={ricarica}><i class="fas fa-sync-alt"></i></Button>
+                </span>
+                
             </div>
             {/* <form onSubmit={inser}>
                 <div className="input-group mb-3">
