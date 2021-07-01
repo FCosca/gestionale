@@ -1,6 +1,6 @@
 import {useParams } from "react-router-dom";
 import React, {useState, useEffect } from 'react'
-import {GetDipendentiAll, GetDipById} from '../services/DipendentiService'
+import {deleteDip, GetDipById } from '../services/DipendentiService'
 import {useHistory} from 'react-router-dom';
 
 
@@ -17,6 +17,14 @@ const DipSingle =({}) =>{
     function navigateToHome() {
         history.push("/Dipendenti" );
       }
+
+    
+    function deleteDipe(id){
+        console.log(id)
+        deleteDip(id)
+        navigateToHome()
+
+    }
 
     
 
@@ -48,6 +56,8 @@ const DipSingle =({}) =>{
                             <td>{dipendenti.numero}</td>
                             <td>{dipendenti.ruolo}</td>
                             <td>{dipendenti.stipendio}</td>
+                            <td><button onClick={e => deleteDipe(dipendenti.id)}>rimuovi</button></td>
+                            
 
 
                         </tr>
