@@ -84,3 +84,20 @@ export async function deleteDip(id){
         
     }};
 
+
+export async function InsertDip(obj){
+    const res = await fetch (`${config.api}dipendente/insert`, {
+        method: "POST",
+        headers: {  'Accept': 'application/json',
+        'Content-Type': 'application/json' },
+        body: JSON.stringify(obj)
+    })
+    const data = await res.json()
+    if (res.status >= 400) {
+        console.warn("ERROR api");
+        throw new Error(data.message);
+      }
+      return data;
+  
+    };
+

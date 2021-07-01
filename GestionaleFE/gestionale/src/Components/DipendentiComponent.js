@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react'
-import {GetDipendentiAll, GetDipById, GetDipendentiByNome, GetDipendentiByCognome, GetDipendentiByRuolo, deleteDip} from '../services/DipendentiService'
+import {GetDipendentiAll, GetDipById, GetDipendentiByNome, GetDipendentiByCognome, GetDipendentiByRuolo, deleteDip, InsertDip} from '../services/DipendentiService'
 import { Link , Redirect, useHistory} from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -11,6 +11,8 @@ function Dipendenti (){
     const [nome, setNome] = useState("")
     const [cognome, setCognome] = useState("")
     const [ruolo, setRuolo] = useState("")
+    const [numero, setNumero] = useState(0)
+    const [stipendio, setStipendio] = useState(0)
     const [loading, setLoading] = useState(false)
     const history = useHistory(); 
     const [show, setShow] = useState(false);
@@ -26,6 +28,7 @@ function Dipendenti (){
     const handleClose4 = () => setShow4(false);
     const handleShow4 = () => setShow4(true);
     const [del, setDel] = useState(false)
+    const [ins, setIns] = useState(false)
     // const [loadingTutto, setLoadingTutto] = useState(false)
 
 
@@ -39,6 +42,20 @@ function Dipendenti (){
             GetDipendentiAll().then(data => setDipendenti(data))
         }
     }, [del])
+
+    // useEffect(() => {
+    //     GetDipendentiAll().then(data => setDipendenti(data))
+        
+    // }, [])
+
+    const obj={
+        nome: nome,
+        cognome: cognome,
+        numero: numero,
+        ruolo: ruolo,
+        stipendio: stipendio
+
+    }
 
 
 
@@ -58,16 +75,34 @@ function Dipendenti (){
     // }
 
 
-    // const handleSubmitCognome=(e)=>{
-    //     e.preventDefault()
-    //     console.log("cognome", cognome)
-    //     GetDipendentiByCognome(cognome).then(data=> setDipendenti(data));
-    //     if(cognome===""){
-    //         {console.log("dentro2")}
-    //         ricarica()
-    //     }
+    const inser=(e)=>{
+        e.preventDefault()
+        console.log(nome, cognome, numero , ruolo, stipendio)
+        console.log(obj)
+        // setIns(true)
+        InsertDip(obj)
+        // console.log(InsertDip(obj))
+        clear()
 
-    // }
+
+    }
+
+    function clear(){
+        setNome("")
+        setCognome("")
+        setNumero(0)
+        setRuolo("")
+        setStipendio(0)
+        ricarica()
+    }
+
+    // useEffect(()=>{
+    //     if(ins){
+
+    //         setIns(false)
+    //         GetDipendentiAll().then(data => setDipendenti(data))
+    //     }
+    // },[ins])
 
 
     // const handleSubmitRuolo=(e)=>{
@@ -91,6 +126,7 @@ function Dipendenti (){
     // }
     
     // 
+
     
 
     async function ricarica(){
@@ -171,11 +207,16 @@ function Dipendenti (){
         // ricarica()
 
     }
+
+    // const inser=(e)=>{
+    //     e.prevetDefault()
+    //     console.log(nome, cognome, numero, ruolo, stipendio)
+    // }
     
     // useEffect(()=>{
     //     if(del){
     //         setDel(false)
-    //         ricarica()
+    //         GetDipendentiAll().then(data => setDipendenti(data))
             
     //     }
     // },[del])
@@ -202,14 +243,14 @@ function Dipendenti (){
                     <Button variant="primary" onClick={chiama7}>Cerca Per ID <i class="fas fa-search"></i></Button>
                 </span>
             </div>
-            {/* <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={inser}>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1"  >nome</span>
                     <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nome} onChange={e => setNome(e.target.value)}/>
                     <input type="submit" value="Submit" />
                 </div>
             </form> */}
-            {/* <form onSubmit={handleSubmitCognome}>
+            {/* <form onSubmit={inser}>
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1"  >cognome</span>
                     <input type="text" className="form-control" placeholder="Cognome" aria-label="Cognome" aria-describedby="basic-addon1" value={cognome} onChange={e => setCognome(e.target.value)}/>
@@ -230,6 +271,15 @@ function Dipendenti (){
                     <input type="submit" value="Submit" />
                 </div>
             </form> */}
+
+            <form onSubmit={inser}>
+                <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nome} onChange={e => setNome(e.target.value)}/>
+                <input type="text" className="form-control" placeholder="Cognome" aria-label="Nome" aria-describedby="basic-addon1" value={cognome} onChange={e => setCognome(e.target.value)}/>
+                <input type="text" className="form-control" placeholder="Numero" aria-label="Numero" aria-describedby="basic-addon1" value={numero} onChange={e => setNumero(e.target.value)}/>
+                <input type="text" className="form-control" placeholder="Ruolo" aria-label="Nome" aria-describedby="basic-addon1" value={ruolo} onChange={e => setRuolo(e.target.value)}/>
+                <input type="text" className="form-control" placeholder="Stipendio" aria-label="Numero" aria-describedby="basic-addon1" value={stipendio} onChange={e => setStipendio(e.target.value)}/>
+                <input type="submit" value="Submit" />
+            </form>
             {console.log("return", dipendenti)}
             {/* {console.log(nome)} */}
             <table class="table">
