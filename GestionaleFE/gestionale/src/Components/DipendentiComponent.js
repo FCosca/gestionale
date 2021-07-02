@@ -28,7 +28,6 @@ function Dipendenti (){
     const handleClose4 = () => setShow4(false);
     const handleShow4 = () => setShow4(true);
     const [del, setDel] = useState(false)
-    const [ins, setIns] = useState(false)
     // const [loadingTutto, setLoadingTutto] = useState(false)
 
 
@@ -44,8 +43,11 @@ function Dipendenti (){
     }, [del])
 
     // useEffect(() => {
-    //     GetDipendentiAll().then(data => setDipendenti(data))
-        
+    //     const GetDip = async() =>{
+    //         const res = await GetDipendentiAll().then(data => setDipendenti(data))
+    //         .then(data => setDipendenti(data))  
+    //     }
+    //     GetDip()
     // }, [])
 
     const obj={
@@ -77,12 +79,12 @@ function Dipendenti (){
     // }
 
 
-    const inser=(e)=>{
+    async function inser(e){
         e.preventDefault()
         console.log(nome, cognome, numero , ruolo, stipendio)
         console.log(obj)
         // setIns(true)
-        InsertDip(obj)
+        await InsertDip(obj)
         // console.log(InsertDip(obj))
         clear()
 
@@ -197,9 +199,9 @@ function Dipendenti (){
         handleClose4() 
     }
 
-    function deleteDipe(id){
+    async function deleteDipe(id){
         console.log(id)
-        deleteDip(id)
+        await deleteDip(id)
         setDel(true)
         // if(del){
         //     setDel(false)
