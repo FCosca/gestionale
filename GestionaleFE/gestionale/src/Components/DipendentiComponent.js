@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react'
-import {GetDipendentiAll, GetDipById, GetDipendentiByNome, GetDipendentiByCognome, GetDipendentiByRuolo, deleteDip} from '../services/DipendentiService'
+import {GetDipendentiAll, GetDipById, GetDipendentiByNome, GetDipendentiByCognome, GetDipendentiByRuolo, deleteDip, InsertDip} from '../services/DipendentiService'
 import { Link , Redirect, useHistory} from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -11,6 +11,8 @@ function Dipendenti (){
     const [nome, setNome] = useState("")
     const [cognome, setCognome] = useState("")
     const [ruolo, setRuolo] = useState("")
+    const [numero, setNumero] = useState(0)
+    const [stipendio, setStipendio] = useState(0)
     const [loading, setLoading] = useState(false)
     const history = useHistory(); 
     const [show, setShow] = useState(false);
@@ -25,8 +27,6 @@ function Dipendenti (){
     const [show4, setShow4] = useState(false);
     const handleClose4 = () => setShow4(false);
     const handleShow4 = () => setShow4(true);
-    const [del, setDel] = useState(false)
-    // const [loadingTutto, setLoadingTutto] = useState(false)
 
 
 
@@ -34,64 +34,16 @@ function Dipendenti (){
     
     useEffect(() => {
         GetDipendentiAll().then(data => setDipendenti(data))
-        if(del){
-            setDel(false)
-            GetDipendentiAll().then(data => setDipendenti(data))
-        }
-    }, [del])
+    }, [])
 
+    const obj={
+        nome: nome,
+        cognome: cognome,
+        numero: numero,
+        ruolo: ruolo,
+        stipendio: stipendio
 
-
-
-    // const handleSubmit =(e)=>{
-    //     e.preventDefault()
-    
-    //     console.log("handlesubmit",nome)
-        
-    //         GetDipendentiByNome(nome).then(data => setDipendenti(data));
-    //         if(nome===""){
-    //                  {console.log("dentro")}
-    //                             ricarica()
-    
-    //              }
-             
-    // }
-
-
-    // const handleSubmitCognome=(e)=>{
-    //     e.preventDefault()
-    //     console.log("cognome", cognome)
-    //     GetDipendentiByCognome(cognome).then(data=> setDipendenti(data));
-    //     if(cognome===""){
-    //         {console.log("dentro2")}
-    //         ricarica()
-    //     }
-
-    // }
-
-
-    // const handleSubmitRuolo=(e)=>{
-    //     e.preventDefault()
-    //     console.log("ruolo", ruolo)
-    //     GetDipendentiByRuolo(ruolo).then(data=>setDipendenti(data));
-    //     if(ruolo===""){
-    //         {console.log("dentro3")}
-    //         ricarica()
-    //     }
-    // }
-
-    // const handleSubmitId=(e)=>{
-    //     e.preventDefault()
-    //     console.log("id", id)
-    //     GetDipById(id).then(data=>setDipendenti(data));
-    //     if(id===""){
-    //         {console.log("dentro4")}
-    //         ricarica()
-    //     }
-    // }
-    
-    // 
-    
+    }
 
     async function ricarica(){
         
@@ -149,7 +101,6 @@ function Dipendenti (){
     }
 
     function chiama7(){
-        {console.log("sto aprendo ruolo")}
         handleShow4()
 
     }
@@ -159,37 +110,20 @@ function Dipendenti (){
         handleClose4() 
     }
 
-    function deleteDipe(id){
+    async function deleteDipe(id){
         console.log(id)
-        deleteDip(id)
-        setDel(true)
-        // if(del){
-        //     setDel(false)
-        //     ricarica()
-        // }
-        
-        // ricarica()
-
+        await deleteDip(id)
+        ricarica()
     }
-    
-    // useEffect(()=>{
-    //     if(del){
-    //         setDel(false)
-    //         ricarica()
-            
-    //     }
-    // },[del])
 
 
 
     return(
         <>
-            {/* <button onClick={navigateToHome}><i class="fas fa-arrow-left"></i></button> */}
             <div id="buttonTOT">
                 <span id="button1">
                     <Button variant="primary" onClick={chiama1}>Cerca Per Nome <i class="fas fa-search"></i></Button>
                 </span>
-
 
                 <span id="button2">
                     <Button variant="primary" onClick={chiama3}>Cerca Per Cognome <i class="fas fa-search"></i></Button>
@@ -198,40 +132,14 @@ function Dipendenti (){
                 <span id="button31">
                     <Button variant="primary" onClick={chiama5}>Cerca Per Ruolo <i class="fas fa-search"></i></Button>
                 </span>
+
                 <span id="button4">
                     <Button variant="primary" onClick={chiama7}>Cerca Per ID <i class="fas fa-search"></i></Button>
                 </span>
+                
             </div>
-            {/* <form onSubmit={handleSubmit}>
-                <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1"  >nome</span>
-                    <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nome} onChange={e => setNome(e.target.value)}/>
-                    <input type="submit" value="Submit" />
-                </div>
-            </form> */}
-            {/* <form onSubmit={handleSubmitCognome}>
-                <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1"  >cognome</span>
-                    <input type="text" className="form-control" placeholder="Cognome" aria-label="Cognome" aria-describedby="basic-addon1" value={cognome} onChange={e => setCognome(e.target.value)}/>
-                    <input type="submit" value="Submit" />
-                </div>
-            </form> */}
-            {/* <form onSubmit={handleSubmitRuolo}>
-                <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1"  >Ruolo</span>
-                    <input type="text" className="form-control" placeholder="Ruolo" aria-label="Ruolo" aria-describedby="basic-addon1" value={ruolo} onChange={e => setRuolo(e.target.value)}/>
-                    <input type="submit" value="Submit" />
-                </div>
-            </form> */}
-            {/* <form onSubmit={navigateToHome}>
-                <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1"  >ID</span>
-                    <input type="text" className="form-control" placeholder="ID" aria-label="ID" aria-describedby="basic-addon1" value={id} onChange={e => setId(e.target.value)}/>
-                    <input type="submit" value="Submit" />
-                </div>
-            </form> */}
+                        
             {console.log("return", dipendenti)}
-            {/* {console.log(nome)} */}
             <table class="table">
                 <thead>
                     <tr>
@@ -338,6 +246,8 @@ function Dipendenti (){
                     </Button>
                 </Modal.Footer>
             </Modal>
+
+            
 
 
             
