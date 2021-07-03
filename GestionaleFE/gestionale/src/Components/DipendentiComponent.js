@@ -116,6 +116,15 @@ function Dipendenti (){
         ricarica()
     }
 
+    function clear(){
+        setNome("")
+        setCognome("")
+        setNumero(0)
+        setRuolo("")
+        setStipendio(0)
+        ricarica()
+    }
+
 
 
     return(
@@ -135,6 +144,10 @@ function Dipendenti (){
 
                 <span id="button4">
                     <Button variant="primary" onClick={chiama7}>Cerca Per ID <i class="fas fa-search"></i></Button>
+                </span>
+                
+                <span id="buttonReset">
+                    <Button variant="primary" onClick={clear}><i class="far fa-times-circle"></i></Button>
                 </span>
                 
             </div>
