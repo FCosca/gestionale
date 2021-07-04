@@ -145,9 +145,13 @@ function Dipendenti (){
                 <span id="button4">
                     <Button variant="primary" onClick={chiama7}>Cerca Per ID <i class="fas fa-search"></i></Button>
                 </span>
-                
+
                 <span id="buttonReset">
                     <Button variant="primary" onClick={clear}><i class="far fa-times-circle"></i></Button>
+                </span>
+                
+                <span id="buttonReset">
+                    <Button variant="primary" onClick={ricarica}><i class="fas fa-sync-alt"></i></Button>
                 </span>
                 
             </div>
