@@ -27,6 +27,9 @@ function Dipendenti (){
     const [show4, setShow4] = useState(false);
     const handleClose4 = () => setShow4(false);
     const handleShow4 = () => setShow4(true);
+    const [show5, setShow5] = useState(false);
+    const handleClose5 = () => setShow5(false);
+    const handleShow5 = () => setShow5(true);
 
 
 
@@ -50,6 +53,13 @@ function Dipendenti (){
             const res = await GetDipendentiAll().then(data => setDipendenti(data));  
                  
 
+    }
+
+    async function inser(){
+        console.log(nome, cognome, numero , ruolo, stipendio)
+        console.log(obj)
+        await InsertDip(obj)
+        clear()
     }
 
     function chiama1(){
@@ -110,6 +120,15 @@ function Dipendenti (){
         handleClose4() 
     }
 
+    function chiama9(){
+        handleShow5()
+    }
+
+    function chiama10(){
+        inser()
+        handleClose5() 
+    }
+
     async function deleteDipe(id){
         console.log(id)
         await deleteDip(id)
@@ -149,9 +168,13 @@ function Dipendenti (){
                 <span id="buttonReset">
                     <Button variant="primary" onClick={clear}><i class="far fa-times-circle"></i></Button>
                 </span>
-                
+
                 <span id="buttonReset">
                     <Button variant="primary" onClick={ricarica}><i class="fas fa-sync-alt"></i></Button>
+                </span>
+
+                <span id="buttonReset">
+                    <Button variant="primary" onClick={chiama9}>Aggiungi Dipendente<i class="fas fa-plus"></i></Button>
                 </span>
                 
             </div>
@@ -259,6 +282,28 @@ function Dipendenti (){
                         Close
                     </Button>
                     <Button variant="primary" onClick={chiama8}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={show5} onHide={handleClose5}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Aggiungi Dipendente</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                
+                    <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nome} onChange={e => setNome(e.target.value)}/>
+                    <input type="text" className="form-control" placeholder="Cognome" aria-label="Nome" aria-describedby="basic-addon1" value={cognome} onChange={e => setCognome(e.target.value)}/>
+                    <input type="text" className="form-control" placeholder="Numero" aria-label="Numero" aria-describedby="basic-addon1" value={numero} onChange={e => setNumero(e.target.value)}/>
+                    <input type="text" className="form-control" placeholder="Ruolo" aria-label="Nome" aria-describedby="basic-addon1" value={ruolo} onChange={e => setRuolo(e.target.value)}/>
+                    <input type="text" className="form-control" placeholder="Stipendio" aria-label="Numero" aria-describedby="basic-addon1" value={stipendio} onChange={e => setStipendio(e.target.value)}/>                        
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose5}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={chiama10}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
