@@ -2,7 +2,7 @@ import {useParams } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import React, {useState, useEffect } from 'react'
-import {GetDipById, UpdateDip} from '../services/DipendentiService'
+import {GetDipById, UpdateDip, deleteDip} from '../services/DipendentiService'
 import {useHistory} from 'react-router-dom';
 
 
@@ -64,6 +64,11 @@ const DipSingle =({}) =>{
         
         
     }
+
+    async function deleteDipe(id){
+        await deleteDip(id)
+        navigateToHome()
+    }
     
    function setta(){
         setNome(dipendenti.nome)
@@ -104,6 +109,7 @@ const DipSingle =({}) =>{
                             <td>{dipendenti.ruolo}</td>
                             <td>{dipendenti.stipendio}</td>
                             <td><Button variant="primary" onClick={chiama}>Modifica</Button></td>
+                            <td><Button variant="primary" onClick={e => deleteDipe(dipendenti.id)}>Rimuovi</Button></td>
 
 
 

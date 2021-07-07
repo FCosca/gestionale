@@ -174,7 +174,7 @@ function Dipendenti (){
                 </span>
 
                 <span id="buttonReset">
-                    <Button variant="primary" onClick={chiama9}>Aggiungi Dipendente<i class="fas fa-plus"></i></Button>
+                    <Button variant="primary" onClick={chiama9}>Aggiungi Dipendente <i class="fas fa-plus"></i></Button>
                 </span>
                 
             </div>
@@ -200,7 +200,7 @@ function Dipendenti (){
                             <td>{dip.numero}</td>
                             <td>{dip.ruolo}</td>
                             <td>{dip.stipendio}</td>
-                            <td><button onClick={e => deleteDipe(dip.id)}>rimuovi</button></td>
+                            <td><Button  ariant="primary" onClick={e => deleteDipe(dip.id)}>rimuovi</Button></td>
 
 
                         </tr>
