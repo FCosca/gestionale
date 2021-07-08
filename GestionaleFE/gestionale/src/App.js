@@ -12,7 +12,8 @@ import ModificaProdotti from './Components/ModoficaProdotti'
 import ModificaProdotti2 from './Components/ModificaProdotto2'
 import DipComponent from './Components/DipendentiComponent'
 import DipSingle from './Components/DIpSingle';
-// import Dip from './services/DipendentiService'
+import ForComponent from './Components/FornitoriComponent'
+import ForSingle from './Components/ForSingle';
 
 
 
@@ -33,6 +34,8 @@ class App extends Component {
           {/* <Route exact path="/prodotti/:id" component={ProdottiFetch} /> */}
           <Route exact path="/dipendenti" component={DipComponent}/>
           <Route exact path="/dipendenti/:id" component={DipSingle} />
+          <Route exact path="/fornitori" component={ForComponent}/>
+          <Route exact path="/fornitori/:id" component={ForSingle}/>
           <Route exact path="/" component={Home}/>
         </Switch>
         <Footer/>
