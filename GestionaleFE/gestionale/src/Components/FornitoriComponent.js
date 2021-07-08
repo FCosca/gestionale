@@ -8,9 +8,35 @@ function Fornitori(){
     const[fornitori, setFornitori] = useState([])
 
 
+    useEffect(() =>{
+        GetFornitoriAll().then(data => setFornitori(data))
+    },[])
+
+
     return(
         <>
-            <h1>Test Component</h1>
+            {console.log("fornitori", fornitori )}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Partita IVA</th>
+                        <th scope="col">Sede</th>
+                    </tr>
+                </thead>
+            {fornitori && fornitori.length > 0 && fornitori.map((forn) =>(
+                <tbody key={forn.id}>
+                    <tr>
+                        <td><Link to={`/fornitori/${forn.id}`}>{forn.id}</Link></td>
+                        <td>{forn.nome}</td>
+                        <td>{forn.piva}</td>
+                        <td>{forn.sede}</td>
+                    </tr>
+
+                </tbody>
+            ))}
+            </table>
         </>
     )
 
