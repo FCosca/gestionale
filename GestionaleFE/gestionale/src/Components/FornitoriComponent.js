@@ -15,6 +15,7 @@ function Fornitori(){
 
     return(
         <>
+            <h1>Fornitori</h1>
             {console.log("fornitori", fornitori )}
             <table class="table">
                 <thead>
