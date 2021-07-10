@@ -7,6 +7,7 @@ import {useHistory} from 'react-router-dom';
 
 
 const ForSingle = ({})=>{
+    const history = useHistory(); 
     const {id} = useParams()
     const [fornitori, setFornitori] = useState ([])
 
@@ -16,12 +17,17 @@ const ForSingle = ({})=>{
         }
         GetForn()
     },[])
+
+    function navigateToHome(){
+        history.push("/Fornitori");
+    }
     
 
 
     return(
         <>
             <h1>Fornitori</h1>
+            <button onClick={navigateToHome}><i class="fas fa-arrow-left"></i></button>
             <table class="table">
                 <thead>
                     <tr>
