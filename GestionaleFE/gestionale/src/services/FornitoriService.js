@@ -39,3 +39,17 @@ export async function GetFornByNome(nome){
         return data;
     }
 }
+
+export async function GetFornByPiva(piva){
+    if(piva!==""){
+        const res = await fetch(`${config.api}fornitore/findByPiva?pIva=${piva}`,{
+            method: 'GET'
+        })
+        const data = await res.json()
+        if(res.status >= 400){
+            console.warn("ERROR api");
+            throw new Error(data.message);
+        }
+        return data;
+    }
+}

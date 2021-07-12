@@ -1,15 +1,19 @@
 import React, {useState, useEffect } from 'react'
-import {GetFornitoriAll, GetFornByNome} from '../services/FornitoriService'
+import {GetFornitoriAll, GetFornByNome, GetFornByPiva} from '../services/FornitoriService'
 import { Link , Redirect, useHistory} from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
 function Fornitori(){
-    const[fornitori, setFornitori] = useState([])
+    const [fornitori, setFornitori] = useState([])
     const [nome, setNome] = useState("")
+    const [piva, setPiva] = useState("")
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [show2, setShow2] = useState(false);
+    const handleClose2 = () => setShow2(false);
+    const handleShow2 = () => setShow2(true);
 
 
     useEffect(() =>{
@@ -26,11 +30,27 @@ function Fornitori(){
 
     function chiama2(){
         GetFornByNome(nome).then(data=>setFornitori(data));
-        if(nome==="")
-            {console.log("dentro")}
-            ricarica()
+            if(nome===""){
+                {console.log("dentro1")}
+                ricarica()
+            }
         handleClose()
     }
+
+    function chiama3(){
+        handleShow2()
+    }
+
+    function chiama4(){
+        GetFornByPiva(piva).then(data=>setFornitori(data));
+            if(piva===""){
+                {console.log("dentro2")}
+                ricarica()
+            }
+        handleClose2()
+    }
+
+
 
 
     return(
@@ -39,6 +59,9 @@ function Fornitori(){
             <div id="buttonTOT">
                 <span id="button1">
                     <Button variant="primary" onClick={chiama1}>Cerca Per Nome <i class="fas fa-search"></i></Button>
+                </span>
+                <span id="button2">
+                    <Button variant="primary" onClick={chiama3}>Cerca Per P.IVA <i class="fas fa-search"></i></Button>
                 </span>
             </div>
             {console.log("fornitori", fornitori )}
@@ -79,6 +102,25 @@ function Fornitori(){
                         Close
                     </Button>
                     <Button variant="primary" onClick={chiama2}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={show2} onHide={handleClose2}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Cerca per P.IVA</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                
+                    <input type="text" className="form-control" placeholder="P.IVA" aria-label="Nome" aria-describedby="basic-addon1" value={piva} onChange={e => setPiva(e.target.value)}/>
+                            
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose2}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={chiama4}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
