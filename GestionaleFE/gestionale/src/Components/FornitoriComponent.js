@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react'
-import {GetFornitoriAll, GetFornByNome, GetFornByPiva} from '../services/FornitoriService'
+import {GetFornitoriAll, GetFornByNome, GetFornByPiva, GetFornBySede} from '../services/FornitoriService'
 import { Link , Redirect, useHistory} from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -8,12 +8,16 @@ function Fornitori(){
     const [fornitori, setFornitori] = useState([])
     const [nome, setNome] = useState("")
     const [piva, setPiva] = useState("")
+    const [sede, setSede] = useState("")
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [show2, setShow2] = useState(false);
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
+    const [show3, setShow3] = useState(false);
+    const handleClose3 = () => setShow3(false);
+    const handleShow3 = () => setShow3(true);
 
 
     useEffect(() =>{
@@ -50,6 +54,19 @@ function Fornitori(){
         handleClose2()
     }
 
+    function chiama5(){
+        handleShow3()
+    }
+
+    function chiama6(){
+        GetFornBySede(sede).then(data=>setFornitori(data));
+            if(sede===""){
+                {console.log("dentro2")}
+                ricarica()
+            }
+        handleClose3()
+    }
+
 
 
 
@@ -62,6 +79,9 @@ function Fornitori(){
                 </span>
                 <span id="button2">
                     <Button variant="primary" onClick={chiama3}>Cerca Per P.IVA <i class="fas fa-search"></i></Button>
+                </span>
+                <span id="button3">
+                    <Button variant="primary" onClick={chiama5}>Cerca Per Sede <i class="fas fa-search"></i></Button>
                 </span>
             </div>
             {console.log("fornitori", fornitori )}
@@ -121,6 +141,25 @@ function Fornitori(){
                         Close
                     </Button>
                     <Button variant="primary" onClick={chiama4}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={show3} onHide={handleClose3}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Cerca per Sede</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                
+                    <input type="text" className="form-control" placeholder="Sede" aria-label="Nome" aria-describedby="basic-addon1" value={sede} onChange={e => setSede(e.target.value)}/>
+                            
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose3}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={chiama6}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

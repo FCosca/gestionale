@@ -53,3 +53,17 @@ export async function GetFornByPiva(piva){
         return data;
     }
 }
+
+export async function GetFornBySede(sede){
+    if(sede!==""){
+        const res = await fetch(`${config.api}fornitore/findBySede?sede=${sede}`,{
+            method: 'GET'
+        })
+        const data = await res.json()
+        if(res.status >= 400){
+            console.warn("ERROR api");
+            throw new Error(data.message);
+        }
+        return data;
+    }
+}
