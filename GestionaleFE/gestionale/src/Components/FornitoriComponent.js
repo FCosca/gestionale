@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button'
 
 function Fornitori(){
     const [fornitori, setFornitori] = useState([])
+    const [id, setId] = useState("")
     const [nome, setNome] = useState("")
     const [piva, setPiva] = useState("")
     const [sede, setSede] = useState("")
@@ -18,6 +19,10 @@ function Fornitori(){
     const [show3, setShow3] = useState(false);
     const handleClose3 = () => setShow3(false);
     const handleShow3 = () => setShow3(true);
+    const [show4, setShow4] = useState(false);
+    const handleClose4 = () => setShow4(false);
+    const handleShow4 = () => setShow4(true);
+    const history = useHistory(); 
 
 
     useEffect(() =>{
@@ -67,6 +72,16 @@ function Fornitori(){
         handleClose3()
     }
 
+    function chiama7(){
+        handleShow4()
+
+    }
+
+    function chiama8(){
+        history.push("/fornitori/"+id );
+        handleClose4() 
+    }
+
 
 
 
@@ -80,8 +95,11 @@ function Fornitori(){
                 <span id="button2">
                     <Button variant="primary" onClick={chiama3}>Cerca Per P.IVA <i class="fas fa-search"></i></Button>
                 </span>
-                <span id="button3">
+                <span id="button31">
                     <Button variant="primary" onClick={chiama5}>Cerca Per Sede <i class="fas fa-search"></i></Button>
+                </span>
+                <span id="button4">
+                    <Button variant="primary" onClick={chiama7}>Cerca Per ID <i class="fas fa-search"></i></Button>
                 </span>
             </div>
             {console.log("fornitori", fornitori )}
@@ -160,6 +178,25 @@ function Fornitori(){
                         Close
                     </Button>
                     <Button variant="primary" onClick={chiama6}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={show4} onHide={handleClose4}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Cerca per ID</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                
+                    <input type="text" className="form-control" placeholder="id" aria-label="id" aria-describedby="basic-addon1" value={id} onChange={e => setId(e.target.value)}/>
+                        
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose4}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={chiama8}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
