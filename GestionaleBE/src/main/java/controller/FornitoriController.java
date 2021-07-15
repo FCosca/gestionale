@@ -54,8 +54,8 @@ public class FornitoriController 	 {
 	
 	@DeleteMapping("/delete")
 	@Produces("application/json")
-	public void remove(@RequestBody Fornitori f) throws ClassNotFoundException, SQLException, NamingException, ParseException {
-		fs.remove(f);
+	public void remove(@RequestParam (value = "id", required  =true ) int id) throws ClassNotFoundException, SQLException, NamingException, ParseException {
+		fs.remove(id);
 	}
 	
 	@GetMapping("/findAll")

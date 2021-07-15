@@ -35,9 +35,8 @@ public class FornitoriRepository {
 		return true;
 	}
 	
-	public void delete(Fornitori f)throws ClassNotFoundException, SQLException, NamingException, ParseException {
-		Fornitori ff= em.find(Fornitori.class, f.getId());
-		em.remove(ff);
+	public void delete(int id)throws ClassNotFoundException, SQLException, NamingException, ParseException {
+		em.remove(em.find(Fornitori.class, id));
 	}
 	
 	@SuppressWarnings("unchecked")

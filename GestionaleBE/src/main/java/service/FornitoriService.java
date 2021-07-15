@@ -46,8 +46,8 @@ public class FornitoriService {
 	}
 	
 	@Transactional
-	public void remove(Fornitori f) throws ClassNotFoundException, SQLException, NamingException, ParseException {
-		fr.delete(f);
+	public void remove(int id) throws ClassNotFoundException, SQLException, NamingException, ParseException {
+		fr.delete(id);
 	}
 	
 	
