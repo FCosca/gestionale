@@ -67,3 +67,17 @@ export async function GetFornBySede(sede){
         return data;
     }
 }
+
+
+export async function deleteFor(id){
+    if(id!==""){
+        var res = await fetch (`${config.api}fornitore/delete?id=${id}`,{
+            method: 'DELETE'
+        })
+        var restext = await res.text();
+        console.log(restext)
+        if(restext === 0){
+            console.log('removed');
+        }
+    }
+}

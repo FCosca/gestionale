@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react'
-import {GetFornitoriAll, GetFornByNome, GetFornByPiva, GetFornBySede} from '../services/FornitoriService'
+import {GetFornitoriAll, GetFornByNome, GetFornByPiva, GetFornBySede, deleteFor} from '../services/FornitoriService'
 import { Link , Redirect, useHistory} from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -82,6 +82,19 @@ function Fornitori(){
         handleClose4() 
     }
 
+    function clear(){
+        setNome("")
+        setPiva("")
+        setSede("")
+        ricarica()
+    }
+
+    async function deleteForn(id){
+        console.log(id)
+        await deleteFor(id)
+        ricarica()
+    }
+
 
 
 
@@ -101,6 +114,12 @@ function Fornitori(){
                 <span id="button4">
                     <Button variant="primary" onClick={chiama7}>Cerca Per ID <i class="fas fa-search"></i></Button>
                 </span>
+                <span id="buttonReset">
+                    <Button variant="primary" onClick={clear}><i class="far fa-times-circle"></i></Button>
+                </span>
+                <span id="buttonReset">
+                    <Button variant="primary" onClick={ricarica}><i class="fas fa-sync-alt"></i></Button>
+                </span>
             </div>
             {console.log("fornitori", fornitori )}
             <table class="table">
@@ -119,6 +138,7 @@ function Fornitori(){
                         <td>{forn.nome}</td>
                         <td>{forn.piva}</td>
                         <td>{forn.sede}</td>
+                        <td><Button  ariant="primary" onClick={e => deleteForn(forn.id)}>rimuovi</Button></td>
                     </tr>
 
                 </tbody>
