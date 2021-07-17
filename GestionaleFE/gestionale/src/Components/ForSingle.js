@@ -2,7 +2,7 @@ import {useParams } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import React, {useState, useEffect } from 'react'
-import {GetFornById} from '../services/FornitoriService'
+import {GetFornById, deleteFor} from '../services/FornitoriService'
 import {useHistory} from 'react-router-dom';
 
 
@@ -22,6 +22,10 @@ const ForSingle = ({})=>{
         history.push("/Fornitori");
     }
     
+    async function deleteForn(id){
+        await deleteFor(id)
+        navigateToHome()
+    }
 
 
     return(
@@ -43,6 +47,8 @@ const ForSingle = ({})=>{
                         <td>{fornitori.nome}</td>
                         <td>{fornitori.piva}</td>
                         <td>{fornitori.sede}</td>
+                        <td><Button variant="primary" onClick={e => deleteForn(fornitori.id)}>Rimuovi</Button></td>
+
                     </tr>
                 </tbody>
             </table>
