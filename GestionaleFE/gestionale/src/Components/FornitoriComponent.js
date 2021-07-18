@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react'
-import {GetFornitoriAll, GetFornByNome, GetFornByPiva, GetFornBySede, deleteFor} from '../services/FornitoriService'
+import {GetFornitoriAll, GetFornByNome, GetFornByPiva, GetFornBySede, deleteFor, InsertFor} from '../services/FornitoriService'
 import { Link , Redirect, useHistory} from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -22,12 +22,28 @@ function Fornitori(){
     const [show4, setShow4] = useState(false);
     const handleClose4 = () => setShow4(false);
     const handleShow4 = () => setShow4(true);
+    const [show5, setShow5] = useState(false);
+    const handleClose5 = () => setShow5(false);
+    const handleShow5 = () => setShow5(true);
     const history = useHistory(); 
 
 
     useEffect(() =>{
         GetFornitoriAll().then(data => setFornitori(data))
     },[])
+
+    const obj ={
+        nome: nome,
+        piva: piva,
+        sede: sede
+    }
+
+    async function insert(){
+        console.log(nome,piva,sede)
+        console.log(obj)
+        await InsertFor(obj)
+        clear()
+    }
 
     async function ricarica(){
         const res = await GetFornitoriAll().then(data=>setFornitori(data))
@@ -95,6 +111,16 @@ function Fornitori(){
         ricarica()
     }
 
+    function chiama9(){
+        handleShow5()
+    }
+
+    function chiama10(){
+        insert()
+        handleClose5() 
+    }
+
+
 
 
 
@@ -119,6 +145,10 @@ function Fornitori(){
                 </span>
                 <span id="buttonReset">
                     <Button variant="primary" onClick={ricarica}><i class="fas fa-sync-alt"></i></Button>
+                </span>
+
+                <span id="buttonReset">
+                    <Button variant="primary" onClick={chiama9}>Aggiungi Fornitori <i class="fas fa-plus"></i></Button>
                 </span>
             </div>
             {console.log("fornitori", fornitori )}
@@ -217,6 +247,27 @@ function Fornitori(){
                         Close
                     </Button>
                     <Button variant="primary" onClick={chiama8}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={show5} onHide={handleClose5}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Aggiungi Fornitori</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                
+                    <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" value={nome} onChange={e => setNome(e.target.value)}/>
+                    <input type="text" className="form-control" placeholder="P.IVa" aria-label="Nome" aria-describedby="basic-addon1" value={piva} onChange={e => setPiva(e.target.value)}/>
+                    <input type="text" className="form-control" placeholder="Sede" aria-label="Nome" aria-describedby="basic-addon1" value={sede} onChange={e => setSede(e.target.value)}/>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose5}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={chiama10}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
