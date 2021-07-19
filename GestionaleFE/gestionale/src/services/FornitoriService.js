@@ -96,3 +96,18 @@ export async function InsertFor(obj){
     }
     return data;
 }
+
+export async function updateFor(obj){
+    const res = await fetch (`${config.api}fornitore/update`, {
+        method: "PUT",
+        headers: {  'Accept': 'application/json',
+            'Content-Type': 'application/json' },
+        body:JSON.stringify(obj)
+    })
+    const data = await res.json()
+    if(res.status >= 400){
+        console.warn("ERROR api");
+        throw new Error(data.message);
+    }
+    return data;
+}
