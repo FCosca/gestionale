@@ -128,14 +128,35 @@ function Dipendenti (){
             </form>
             {console.log("return", dipendenti)}
             {/* {console.log(nome)} */}
-            {dipendenti && dipendenti.length > 0 && dipendenti.map((dip)=>(
-                <div key={dip.id}>
-                    {console.log("return2", dipendenti)}
-               <Link to={`/dipendenti/${dip.id}`} ><p >{dip.id}</p></Link>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Cognome</th>
+                        <th scope="col">Numero</th>
+                        <th scope="col">Ruolo</th>
+                        <th scope="col">Stipendio</th>
+                    </tr>
+                </thead>
+                {dipendenti && dipendenti.length > 0 && dipendenti.map((dip)=>(
+                    <tbody key={dip.id}>
+                        <tr>
+                            <td><Link to={`/dipendenti/${dip.id}`} >{dip.id}</Link></td>
+                            <td>{dip.nome}</td>
+                            <td>{dip.cognome}</td>
+                            <td>{dip.numero}</td>
+                            <td>{dip.ruolo}</td>
+                            <td>{dip.stipendio}</td>
 
-                {/* <p onClick={GetDipById(dip.id)}>{dip.id}{dip.nome}{dip.cognome}</p> */}
-                </div>
-            ))}
+
+                        </tr>
+                        
+                    </tbody>
+                ))}
+
+            </table>
+            
         </>
     )
 }

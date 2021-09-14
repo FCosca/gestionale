@@ -15,9 +15,37 @@ const DipSingle =({}) =>{
 
     return (
         <>
-            {console.log(dipendenti)}
+            {/* {console.log(dipendenti)}
             {dipendenti.id}
-            {dipendenti.nome}
+            {dipendenti.nome} */}
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Cognome</th>
+                        <th scope="col">Numero</th>
+                        <th scope="col">Ruolo</th>
+                        <th scope="col">Stipendio</th>
+                    </tr>
+                </thead>
+                
+                    <tbody>
+                        <tr>
+                            <td>{dipendenti.id}</td>
+                            <td>{dipendenti.nome}</td>
+                            <td>{dipendenti.cognome}</td>
+                            <td>{dipendenti.numero}</td>
+                            <td>{dipendenti.ruolo}</td>
+                            <td>{dipendenti.stipendio}</td>
+
+
+                        </tr>
+                        
+                    </tbody>
+
+            </table>
         </>
     )
 }
