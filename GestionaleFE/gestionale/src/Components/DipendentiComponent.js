@@ -1,123 +1,19 @@
 import React, { Component, useState, useEffect } from 'react'
-import {GetDipendentiAll, GetDipById, GetDipendentiByNome} from '../services/DipendentiService'
+import {GetDipendentiAll, GetDipById} from '../services/DipendentiService'
 import { Link } from 'react-router-dom';
 
 
 function Dipendenti (){
     const [dipendenti, setDipendenti] = useState([])
-    const [nome, setNome] = useState("")
-    const [loading, setLoading] = useState(false)
-    // const [loadingTutto, setLoadingTutto] = useState(false)
 
-
-
-
-    // useEffect(() => {
-
-
-    //     //  const res1 = GetDipendentiAll().then(data => setDipendenti(data)).then(console.log("res1",dipendenti));
-    //     //  console.log("con",GetDipendentiAll().then(data => setDipendenti(data)))
-    //      const GetDatiDip= async()=>{
-    //         const res1 = await GetDipendentiAll()
-    //         .then(data => setDipendenti(data), console.log("con",dipendenti))
-    //         .catch(console.error("errore"))
-
-    //      }
-    //      GetDatiDip();
-    // },[])
-
-    useEffect(() => {
-        GetDipendentiAll().then(data => setDipendenti(data))
-        
-    }, [])
-
-//     useEffect(() => {
-
-//         const GetDatiDip = async()=>{
-//            const res = await fetch(`${config.api}dipendente/findAll`)
-//            const data = await res.json()
-//            .then(data => setDipendenti(data), console.log("dentro use", dipendenti))
-//            .catch(error => alert(error='errore loading'))
-//         }
-//         GetDatiDip();
-//    },[])
-
-    // useEffect(() => {
-    //     const GetDatiDip = async()=>{
-    //         const res = await GetDipendentiAll().then(data => setDipendenti(data));
-    //     }
-    //     GetDatiDip();
-    // }, [])
-
-    // useEffect(() => {
-    //     async function GetDatiDip(){
-    //         const res = await GetDipendentiAll().then(data => setDipendenti(data));
-    //     }
-    // }, [input])
-
-
-    const handleSubmit =(e)=>{
-        e.preventDefault()
-        // setLoading(true)
-        // console.log(loading)
-        console.log("handlesubmit",nome)
-        // if(nome === ""){
-        //     console.log("uguale")
-        // }
-        // else{
-        //     GetDipendentiByNome(nome).then(data => setDipendenti(data))
-        // ricarica()
-        // }
-        // if(dipendenti){
-        //     GetDipendentiByNome(nome).then(data => setDipendenti(data));
-        //     // ricarica()
-        // }
-            // if(dipendenti){
-            // {console.log("dentro2")}
-            //  GetDipendentiByNome(nome).then(data => setDipendenti(data));
-            //  if(nome===""){
-            //      {console.log("dentro")}
-            //                 //   GetDipendentiAll().then(data => setDipendenti(data));
-            //                 ricarica()
-
-            //  }
-            // }
-            //  GetDipendentiAll().then(data => setDipendenti(data));
-            GetDipendentiByNome(nome).then(data => setDipendenti(data));
-            if(nome===""){
-                     {console.log("dentro")}
-                                //   GetDipendentiAll().then(data => setDipendenti(data));
-                                ricarica()
     
-                 }
-             
-    }
-
-    async function ricarica(){
-        
-            const res = await GetDipendentiAll().then(data => setDipendenti(data));
-            // console.log("res",res)
-            // if(res){
-            //     console.log("dentro ricarica")
-            // }
-        
-
-    }
-
-
-    // useEffect(() => {
-    //     console.log("dentro 2")
-    //     if(loading){
-    //         setLoading(false)
-    //         console.log("dentro")
-    //         GetDipendentiByNome(nome).then(data => setDipendenti(data))
-    //     }
-    // }, [nome])
-
-
+    useEffect(() => {
+        GetDipendentiAll().then(data => setDipendenti(data));
+    }, [])
 
     return(
         <>
+<<<<<<< HEAD
 
             <form onSubmit={handleSubmit}>
                 <div className="input-group mb-3">
@@ -157,6 +53,16 @@ function Dipendenti (){
 
             </table>
             
+=======
+            {console.log(dipendenti)}
+            {dipendenti.map((dip)=>(
+                <>
+               <Link to={`/dipendenti/${dip.id}`}><p>{dip.id}</p></Link> 
+
+                {/* <p onClick={GetDipById(dip.id)}>{dip.id}{dip.nome}{dip.cognome}</p> */}
+                </>
+            ))}
+>>>>>>> parent of fa689f8 (FE: add method Dipendente GetByNome)
         </>
     )
 }
