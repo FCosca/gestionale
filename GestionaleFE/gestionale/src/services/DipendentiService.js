@@ -14,7 +14,7 @@ export async function GetDipendentiAll(){
 }
 
 export async function GetDipById(id){
-    if(id!=""){
+    if(id!==""){
     const res = await fetch(`${config.api}dipendente/findByID?id=${id}`,{
         method: 'GET'
       })
@@ -29,7 +29,7 @@ export async function GetDipById(id){
 }};
 
 export async function GetDipendentiByNome(nome){
-    if(nome!=""){
+    if(nome!==""){
     const res = await fetch (`${config.api}dipendente/findByNome?nome=${nome}`,{
         method: 'GET'
     })
@@ -43,7 +43,7 @@ export async function GetDipendentiByNome(nome){
     }};
 
 export async function GetDipendentiByCognome(cognome){
-    if(cognome!=""){
+    if(cognome!==""){
         const res = await fetch (`${config.api}dipendente/findByCognome?cognome=${cognome}`, {
             method: 'GET'
         })
@@ -57,7 +57,7 @@ export async function GetDipendentiByCognome(cognome){
     }};
 
 export async function GetDipendentiByRuolo(ruolo){
-    if(ruolo!=""){
+    if(ruolo!==""){
         const res = await fetch (`${config.api}dipendente/findByRuolo?ruolo=${ruolo}`, {
             method: 'GET'
         })
@@ -71,13 +71,13 @@ export async function GetDipendentiByRuolo(ruolo){
     }};
 
 export async function deleteDip(id){
-    if(id!=""){
+    if(id!==""){
         var res = await fetch (`${config.api}dipendente/delete?id=${id}`, {
             method: 'DELETE'
         })
         var restext = await res.text();
         console.log(restext)
-        if(restext == 0){
+        if(restext === 0){
             console.log('removed');
             // GetDipendentiAll();
           }
